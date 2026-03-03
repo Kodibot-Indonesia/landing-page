@@ -1,0 +1,22 @@
+---
+import { m } from '../../paraglide/messages.js';
+import FAQItem from './FAQItem.astro';
+---
+
+<section class="py-24 bg-[#F3F4F6]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-[#2D2D2D] font-sans mb-4">
+        {m.faq_title()}
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      <FAQItem question={m.faq_q1()} answer={m.faq_a1()} />
+      <FAQItem question={m.faq_q2()} answer={m.faq_a2()} />
+      <FAQItem question={m.faq_q3()} answer={m.faq_a3()} />
+      <FAQItem question={m.faq_q4()} answer={m.faq_a4()} />
+      <FAQItem question={m.faq_q5()} answer={m.faq_a5()} />
+    </div>
+  </div>
+</section>

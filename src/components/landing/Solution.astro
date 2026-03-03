@@ -1,0 +1,62 @@
+---
+import { PlayCircle, FileCheck, MonitorSmartphone, Cpu } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="py-24 bg-white" id="demo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 text-[#1D8536] font-bold text-sm mb-4">
+        ✨ {m.solution_badge()}
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#2D2D2D] font-sans mb-6">
+        {m.solution_title()}
+      </h2>
+      <p class="text-lg text-[#6B7280]">
+        {m.solution_desc()}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="rounded-3xl overflow-hidden shadow-2xl bg-[#2D2D2D] p-2 aspect-video relative flex items-center justify-center group">
+        <div
+          class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"
+          aria-hidden
+        />
+        <div class="w-16 h-16 bg-[#E18914] text-white rounded-full flex items-center justify-center z-10 cursor-pointer shadow-[0_0_30px_rgba(225,137,20,0.6)] group-hover:scale-110 transition-transform">
+          <PlayCircle size={32} class="ml-1" />
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#F9DB2B]/20 rounded-xl flex items-center justify-center mt-1">
+            <FileCheck size={24} class="text-[#E18914]" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step1_title()}</h3>
+            <p class="text-[#6B7280]">{m.solution_step1_desc()}</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#1D8536]/10 rounded-xl flex items-center justify-center mt-1">
+            <MonitorSmartphone size={24} class="text-[#1D8536]" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step2_title()}</h3>
+            <p class="text-[#6B7280]">{m.solution_step2_desc()}</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mt-1">
+            <Cpu size={24} class="text-blue-600" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step3_title()}</h3>
+            <p class="text-[#6B7280]">{m.solution_step3_desc()}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

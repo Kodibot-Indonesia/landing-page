@@ -1,0 +1,37 @@
+---
+interface Props {
+  currentLocale?: string;
+}
+const { currentLocale = 'en' } = Astro.props;
+import { Bot } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+import LanguageSwitcher from '../LanguageSwitcher.astro';
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center gap-2">
+        <div class="bg-[#E18914] text-white p-2 rounded-xl">
+          <Bot size={24} />
+        </div>
+        <span class="text-2xl font-bold text-[#E18914] font-sans tracking-tight">Kodibot</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <LanguageSwitcher currentLocale={currentLocale} />
+        <a
+          href="/register"
+          class="text-[#6B7280] hover:text-[#E18914] font-medium transition-colors hidden sm:block"
+        >
+          {m.nav_login()}
+        </a>
+        <a
+          href="/register"
+          class="bg-[#E18914] hover:bg-[#c9780f] text-white px-5 py-2.5 rounded-full font-medium transition-all hover:shadow-lg hover:shadow-[#E18914]/30 hover:-translate-y-0.5 active:translate-y-0"
+        >
+          {m.nav_tryFree()}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,70 @@
+---
+import { CheckCircle2, XCircle } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="py-24 bg-[#F3F4F6]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-[#2D2D2D] font-sans mb-4">
+        {m.comparison_title()}
+      </h2>
+      <p class="text-[#6B7280]">
+        {m.comparison_subtitle()}
+      </p>
+    </div>
+
+    <div class="overflow-x-auto rounded-3xl shadow-xl border border-gray-200 bg-white">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="p-6 bg-gray-50 border-b border-r border-gray-200 text-[#2D2D2D] font-bold w-1/4">
+              {m.comparison_col1()}
+            </th>
+            <th class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50">
+              {m.comparison_col2()}
+            </th>
+            <th class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50">
+              {m.comparison_col3()}
+            </th>
+            <th class="p-6 border-b border-[#E18914] bg-[#E18914]/10 text-[#E18914] font-bold text-center w-1/4 text-lg">
+              {m.comparison_col4()}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-sm md:text-base">
+          <tr>
+            <td class="p-6 border-b border-r border-gray-200 font-medium">{m.comparison_r1()}</td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-red-500"><XCircle size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-green-500"><CheckCircle2 size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"><CheckCircle2 size={24} class="mx-auto inline" /> CSTA Aligned</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-r border-gray-200 font-medium">{m.comparison_r2()}</td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-red-500"><XCircle size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-red-500"><XCircle size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"><CheckCircle2 size={24} class="mx-auto inline" /> Simulator Bawaan</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-r border-gray-200 font-medium">{m.comparison_r3()}</td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-red-500"><XCircle size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-gray-500">{m.comparison_c3_manual()}</td>
+            <td class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"><CheckCircle2 size={24} class="mx-auto inline" /> AI Validation</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-r border-gray-200 font-medium">{m.comparison_r4()}</td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-green-500"><CheckCircle2 size={20} class="mx-auto inline" /></td>
+            <td class="p-6 border-b border-r border-gray-200 text-center text-red-500"><XCircle size={20} class="mx-auto inline" /> {m.comparison_c3_schedule()}</td>
+            <td class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"><CheckCircle2 size={24} class="mx-auto inline" /> 24/7 Tersedia</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-r border-gray-200 font-medium rounded-bl-3xl">{m.comparison_r5()}</td>
+            <td class="p-6 border-r border-gray-200 text-center text-gray-500">{m.comparison_c2_free()}</td>
+            <td class="p-6 border-r border-gray-200 text-center text-gray-500">{m.comparison_c3_cost()}</td>
+            <td class="p-6 bg-[#E18914]/5 text-center text-[#E18914] font-extrabold rounded-br-3xl">{m.comparison_c4_lifetime()}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

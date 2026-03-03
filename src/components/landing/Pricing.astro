@@ -1,0 +1,76 @@
+---
+import { CheckCircle2 } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="py-24 bg-white" id="pricing">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-4xl font-bold text-[#2D2D2D] font-sans mb-4">
+        {m.pricing_title()}
+      </h2>
+      <p class="text-[#6B7280]">
+        {m.pricing_subtitle()}
+      </p>
+    </div>
+
+    <div class="max-w-lg mx-auto bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden relative transform hover:scale-105 transition-transform duration-300">
+      <div class="absolute top-0 inset-x-0 bg-[#1D8536] text-white text-center py-2 font-bold text-sm tracking-widest uppercase">
+        🏷️ {m.pricing_badge()}
+      </div>
+
+      <div class="p-10 pt-16 text-center border-b border-gray-100">
+        <h3 class="text-2xl font-bold text-[#2D2D2D] mb-4">
+          {m.pricing_planTitle()}
+        </h3>
+        <div class="flex items-center justify-center gap-4 mb-2">
+          <span class="text-gray-400 line-through text-2xl font-medium">
+            {m.pricing_priceOld()}
+          </span>
+        </div>
+        <div class="text-6xl font-extrabold text-[#E18914] font-sans tracking-tighter">
+          <span class="text-3xl align-top">Rp</span>{m.pricing_priceNew()}<span class="text-3xl">{m.pricing_priceUnit()}</span>
+        </div>
+        <p class="mt-4 text-[#6B7280] font-medium">
+          {m.pricing_priceNote()}
+        </p>
+      </div>
+
+      <div class="p-10 bg-[#F3F4F6]/50">
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center gap-3">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium">{m.pricing_f1()}</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium">{m.pricing_f2()}</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium">{m.pricing_f3()}</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium">{m.pricing_f4()}</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium">{m.pricing_f5()}</span>
+          </li>
+        </ul>
+        <a
+          href="/register"
+          class="w-full flex items-center justify-center bg-[#E18914] text-white py-5 rounded-2xl text-xl font-bold hover:bg-[#c9780f] transition-all shadow-xl hover:shadow-[#E18914]/40"
+        >
+          {m.pricing_cta()}
+        </a>
+        <div class="mt-4 text-center">
+          <a href="/register" class="text-sm text-[#E18914] font-medium hover:underline">
+            {m.pricing_ctaLink()}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="relative py-24 bg-[#1D8536] overflow-hidden text-center">
+  <div
+    class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat mix-blend-overlay"
+    aria-hidden
+  />
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl aspect-square bg-[#F9DB2B] rounded-full blur-[150px] opacity-20 pointer-events-none"
+    aria-hidden
+  />
+
+  <div class="max-w-3xl mx-auto px-4 relative z-10">
+    <h2 class="text-4xl lg:text-5xl font-bold text-white font-sans mb-6 leading-tight">
+      {m.cta_title()}
+    </h2>
+    <p class="text-xl text-white/80 mb-10">
+      {m.cta_subtitle()}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="/register"
+        class="w-full sm:w-auto bg-[#E18914] hover:bg-[#F9DB2B] hover:text-[#2D2D2D] text-white px-10 py-5 rounded-full text-xl font-bold transition-all shadow-[0_0_30px_rgba(225,137,20,0.5)] transform hover:scale-105"
+      >
+        {m.cta_button()}
+      </a>
+    </div>
+  </div>
+</section>

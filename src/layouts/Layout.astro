@@ -1,23 +1,94 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  canonicalURL?: string;
+}
+
+const { title = 'KODIBOT – Coding & STEM Learning Platform for Kids', description = 'Learn coding and Arduino from scratch with interactive simulator. No hardware purchase needed. Try free now.', lang = 'en', canonicalURL } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+const url = canonicalURL || new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage = `${siteUrl}/favicon/web-app-manifest-512x512.png`;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+
+    <!-- Primary Meta -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="kids coding, online coding course for kids, Arduino for kids, STEM platform for kids, coding for beginners kids" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'id' ? 'id_ID' : lang === 'ms' ? 'ms_MY' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={url} />
+
+    <!-- JSON-LD: Organization & WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Kodibot",
+          "url": siteUrl,
+          "logo": `${siteUrl}/favicon/web-app-manifest-512x512.png`
+        },
+        {
+          "@type": "WebSite",
+          "name": "Kodibot",
+          "url": siteUrl,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": { "@type": "EntryPoint", "urlTemplate": `${siteUrl}/search?q={search_term_string}` },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    })} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
 </style>

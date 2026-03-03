@@ -9,6 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@inlang/paraglide-js": "^2.13.1",
+    "@lucide/astro": "^0.576.0",
+    "astro": "^5.17.1",
+    "tailwindcss": "^3.4.19"
   }
 }

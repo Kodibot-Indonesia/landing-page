@@ -1,0 +1,44 @@
+---
+import { locales } from '../../paraglide/runtime.js';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/landing/Nav.astro';
+import Hero from '../../components/landing/Hero.astro';
+import Problem from '../../components/landing/Problem.astro';
+import Solution from '../../components/landing/Solution.astro';
+import HowItWorks from '../../components/landing/HowItWorks.astro';
+import Simulator from '../../components/landing/Simulator.astro';
+import LearningPath from '../../components/landing/LearningPath.astro';
+import Outcome from '../../components/landing/Outcome.astro';
+import Comparison from '../../components/landing/Comparison.astro';
+import Pricing from '../../components/landing/Pricing.astro';
+import FAQ from '../../components/landing/FAQ.astro';
+import CTA from '../../components/landing/CTA.astro';
+import Footer from '../../components/landing/Footer.astro';
+import { m } from '../../paraglide/messages.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const lang = locale || 'en';
+const canonicalURL = `${Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id'}/${lang}/`;
+---
+
+<Layout title={m.meta_title()} description={m.meta_description()} lang={lang} canonicalURL={canonicalURL}>
+  <div class="min-h-screen bg-[#F3F4F6] font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
+    <Nav currentLocale={lang} />
+    <Hero />
+    <Problem />
+    <Solution />
+    <HowItWorks />
+    <Simulator />
+    <LearningPath />
+    <Outcome />
+    <Comparison />
+    <Pricing />
+    <FAQ />
+    <CTA />
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,44 @@
+---
+interface Props {
+  currentLocale?: string;
+}
+const { currentLocale = 'en' } = Astro.props;
+import { locales, baseLocale } from '../paraglide/runtime.js';
+
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(/^\/(en|id|ms)(\/|$)/, '$2') || '/';
+const pathSuffix = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
+---
+
+<div class="relative group">
+  <button
+    type="button"
+    class="flex items-center gap-1 px-3 py-2 rounded-lg text-[#6B7280] hover:text-[#E18914] hover:bg-gray-100 transition-colors text-sm font-medium"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    id="lang-switcher-btn"
+  >
+    <span class="uppercase">{currentLocale}</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div
+    class="absolute right-0 mt-1 py-1 bg-white rounded-lg shadow-lg border border-gray-200 min-w-[120px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
+    role="listbox"
+  >
+    {locales.map((locale) => {
+      const href = `/${locale}${pathSuffix}`;
+      const isActive = currentLocale === locale;
+      return (
+        <a
+          href={href}
+          class={`block px-4 py-2 text-sm hover:bg-gray-100 ${isActive ? 'text-[#E18914] font-bold' : 'text-[#6B7280]'}`}
+          role="option"
+        >
+          {locale === 'en' ? 'English' : locale === 'id' ? 'Indonesia' : 'Melayu'}
+        </a>
+      );
+    })}
+  </div>
+</div>
