@@ -7,6 +7,8 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kodibot.id',
+  base: '/',
+  output: 'static',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'id', 'ms'],
