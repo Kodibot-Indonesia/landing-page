@@ -13,6 +13,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: true },
   },
   integrations: [tailwind(), sitemap()],
+  redirects: { '/': '/en/' },
   vite: {
     plugins: [
       paraglideVitePlugin({

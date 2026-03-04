@@ -31,18 +31,18 @@ import { m } from '../../paraglide/messages.js';
             href="/register"
             class="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:shadow-[#E18914]/30 hover:-translate-y-1"
           >
-            {m.hero_ctaRegister()} <ArrowRight size={20} />
+            {m.hero_cta_register()} <ArrowRight size={20} />
           </a>
           <a
             href="#demo"
             class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-[#F3F4F6] text-[#2D2D2D] border border-gray-200 px-8 py-4 rounded-full text-lg font-bold transition-all hover:-translate-y-1"
           >
-            <PlayCircle size={20} class="text-[#1D8536]" /> {m.hero_ctaDemo()}
+            <PlayCircle size={20} class="text-[#1D8536]" /> {m.hero_cta_demo()}
           </a>
         </div>
         <div class="flex items-center gap-4 text-sm text-[#6B7280] font-medium animate-fade-in-up [animation-delay:300ms]">
           <div class="flex items-center gap-1">
-            <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_freeTrial()}
+            <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_free_trial()}
           </div>
           <div class="flex items-center gap-1">
             <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_lifetime()}
@@ -72,9 +72,9 @@ import { m } from '../../paraglide/messages.js';
                   <div class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex justify-center items-center">
                     <Check size={16} />
                   </div>
-                  <h4 class="text-sm font-bold text-[#2D2D2D]">{m.hero_missionComplete()}</h4>
+                  <h4 class="text-sm font-bold text-[#2D2D2D]">{m.hero_mission_complete()}</h4>
                 </div>
-                <p class="text-xs text-gray-500">{m.hero_missionDesc()}</p>
+                <p class="text-xs text-gray-500">{m.hero_mission_desc()}</p>
               </div>
             </div>
             <div class="w-7/12 bg-[#2D2D2D] p-4 relative flex items-center justify-center overflow-hidden">
@@ -82,7 +82,7 @@ import { m } from '../../paraglide/messages.js';
               <div class="relative z-10 flex flex-col gap-4 items-center">
                 <div class="w-48 h-12 bg-gray-100 rounded-md flex p-1 justify-center gap-1 shadow-inner">
                   {Array.from({ length: 10 }).map((_, i) => (
-                    <div key={i} class="flex flex-col gap-1 justify-center">
+                    <div class="flex flex-col gap-1 justify-center">
                       <div class="w-2 h-2 rounded-full bg-gray-300 shadow-inner"></div>
                       <div class="w-2 h-2 rounded-full bg-gray-300 shadow-inner"></div>
                     </div>
@@ -105,8 +105,8 @@ import { m } from '../../paraglide/messages.js';
         <div class="absolute -bottom-6 -right-6 bg-white border-2 border-[#1D8536] text-[#1D8536] px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce">
           <Target size={32} />
           <div>
-            <div class="font-bold text-lg leading-none">{m.hero_badgeLabel()}</div>
-            <div class="text-sm text-gray-500">{m.hero_badgeSublabel()}</div>
+            <div class="font-bold text-lg leading-none">{m.hero_badge_label()}</div>
+            <div class="text-sm text-gray-500">{m.hero_badge_sublabel()}</div>
           </div>
         </div>
       </div>

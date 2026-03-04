@@ -4,12 +4,15 @@ interface Props {
   description?: string;
   lang?: string;
   canonicalURL?: string;
+  hreflangAlternates?: { locale: string; url: string }[];
+  faqItems?: { question: string; answer: string }[];
 }
 
-const { title = 'KODIBOT – Coding & STEM Learning Platform for Kids', description = 'Learn coding and Arduino from scratch with interactive simulator. No hardware purchase needed. Try free now.', lang = 'en', canonicalURL } = Astro.props;
+const { title = 'KODIBOT – Coding & STEM Learning Platform for Kids', description = 'Learn coding and Arduino from scratch with interactive simulator. No hardware purchase needed. Try free now.', lang = 'en', canonicalURL, hreflangAlternates, faqItems } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
 const url = canonicalURL || new URL(Astro.url.pathname, siteUrl).toString();
 const ogImage = `${siteUrl}/favicon/web-app-manifest-512x512.png`;
+const hreflangMap: Record<string, string> = { en: 'en-US', id: 'id-ID', ms: 'ms-MY' };
 ---
 
 <!doctype html>
@@ -48,7 +51,13 @@ const ogImage = `${siteUrl}/favicon/web-app-manifest-512x512.png`;
     <!-- Canonical -->
     <link rel="canonical" href={url} />
 
-    <!-- JSON-LD: Organization & WebSite -->
+    <!-- hreflang -->
+    {hreflangAlternates?.map((alt) => (
+      <link rel="alternate" hreflang={hreflangMap[alt.locale] || alt.locale} href={alt.url} />
+    ))}
+    {hreflangAlternates && <link rel="alternate" hreflang="x-default" href={hreflangAlternates.find((a) => a.locale === 'en')?.url || url} />}
+
+    <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
@@ -67,11 +76,18 @@ const ogImage = `${siteUrl}/favicon/web-app-manifest-512x512.png`;
             "target": { "@type": "EntryPoint", "urlTemplate": `${siteUrl}/search?q={search_term_string}` },
             "query-input": "required name=search_term_string"
           }
-        }
+        },
+        ...(faqItems && faqItems.length > 0 ? [{
+          "@type": "FAQPage",
+          "mainEntity": faqItems.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+          }))
+        }] : [])
       ]
     })} />
 
-    <slot name="head" />
   </head>
   <body>
     <slot />

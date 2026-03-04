@@ -3,40 +3,57 @@ interface Props {
   currentLocale?: string;
 }
 const { currentLocale = 'en' } = Astro.props;
-import { locales, baseLocale } from '../paraglide/runtime.js';
+import { locales } from '../paraglide/runtime.js';
 
 const currentPath = Astro.url.pathname;
 const pathWithoutLocale = currentPath.replace(/^\/(en|id|ms)(\/|$)/, '$2') || '/';
 const pathSuffix = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
+
+const localeLabels: Record<string, string> = {
+  en: 'English',
+  id: 'Indonesia',
+  ms: 'Melayu',
+};
 ---
 
 <div class="relative group">
   <button
     type="button"
-    class="flex items-center gap-1 px-3 py-2 rounded-lg text-[#6B7280] hover:text-[#E18914] hover:bg-gray-100 transition-colors text-sm font-medium"
+    class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white hover:border-[#E18914]/50 hover:bg-[#E18914]/5 transition-all text-sm font-medium text-[#2D2D2D] shadow-sm"
     aria-haspopup="listbox"
     aria-expanded="false"
     id="lang-switcher-btn"
   >
-    <span class="uppercase">{currentLocale}</span>
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-4 h-4 text-[#E18914]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>
+    <span class="font-semibold text-[#2D2D2D]">{localeLabels[currentLocale] ?? currentLocale}</span>
+    <svg class="w-4 h-4 text-[#6B7280] transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg>
   </button>
   <div
-    class="absolute right-0 mt-1 py-1 bg-white rounded-lg shadow-lg border border-gray-200 min-w-[120px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
+    class="absolute right-0 mt-2 py-2 bg-white rounded-xl shadow-xl border border-gray-200 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
     role="listbox"
   >
+    <div class="px-4 py-2 border-b border-gray-100">
+      <span class="text-xs font-semibold uppercase tracking-wider text-[#6B7280]">Language</span>
+    </div>
     {locales.map((locale) => {
       const href = `/${locale}${pathSuffix}`;
       const isActive = currentLocale === locale;
       return (
         <a
           href={href}
-          class={`block px-4 py-2 text-sm hover:bg-gray-100 ${isActive ? 'text-[#E18914] font-bold' : 'text-[#6B7280]'}`}
+          class={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors ${
+            isActive
+              ? 'bg-[#E18914]/10 text-[#E18914] font-bold'
+              : 'text-[#2D2D2D] hover:bg-gray-50'
+          }`}
           role="option"
         >
-          {locale === 'en' ? 'English' : locale === 'id' ? 'Indonesia' : 'Melayu'}
+          <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${isActive ? 'bg-[#E18914]' : 'bg-transparent'}`} aria-hidden="true" />
+          {localeLabels[locale]}
         </a>
       );
     })}

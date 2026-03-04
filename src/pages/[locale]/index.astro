@@ -22,10 +22,19 @@ export function getStaticPaths() {
 
 const { locale } = Astro.params;
 const lang = locale || 'en';
-const canonicalURL = `${Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id'}/${lang}/`;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+const canonicalURL = `${siteUrl}/${lang}/`;
+const hreflangAlternates = locales.map((l) => ({ locale: l, url: `${siteUrl}/${l}/` }));
+const faqItems = [
+  { question: m.faq_q1(), answer: m.faq_a1() },
+  { question: m.faq_q2(), answer: m.faq_a2() },
+  { question: m.faq_q3(), answer: m.faq_a3() },
+  { question: m.faq_q4(), answer: m.faq_a4() },
+  { question: m.faq_q5(), answer: m.faq_a5() },
+];
 ---
 
-<Layout title={m.meta_title()} description={m.meta_description()} lang={lang} canonicalURL={canonicalURL}>
+<Layout title={m.meta_title()} description={m.meta_description()} lang={lang} canonicalURL={canonicalURL} hreflangAlternates={hreflangAlternates} faqItems={faqItems}>
   <div class="min-h-screen bg-[#F3F4F6] font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
     <Nav currentLocale={lang} />
     <Hero />
