@@ -1,6 +1,16 @@
 ---
-import { ArrowRight, CheckCircle2, PlayCircle, Sparkles, Target, Check, Cpu } from '@lucide/astro';
+import { ArrowRight, CheckCircle2, PlayCircle, Sparkles, Target } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import scratchImg from '../../assets/screen/scratch.png';
+import makecodeImg from '../../assets/screen/makecode.png';
+import arduinoImg from '../../assets/screen/arduino.png';
+
+const screenshots = [
+  { src: scratchImg, alt: 'Scratch' },
+  { src: makecodeImg, alt: 'MakeCode IoT' },
+  { src: arduinoImg, alt: 'Arduino' },
+];
+const aspectRatio = scratchImg.width / scratchImg.height;
 ---
 
 <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-white">
@@ -51,8 +61,8 @@ import { m } from '../../paraglide/messages.js';
       </div>
 
       <div class="relative animate-fade-in-up [animation-delay:200ms] lg:ml-8">
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-2xl bg-white flex flex-col h-[400px]">
-          <div class="bg-gray-100 flex items-center gap-2 px-4 py-3 border-b border-gray-200">
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-2xl bg-white flex flex-col w-full max-w-xl">
+          <div class="bg-gray-100 flex items-center gap-2 px-4 py-3 border-b border-gray-200 shrink-0">
             <div class="flex gap-1.5">
               <div class="w-3 h-3 rounded-full bg-red-400"></div>
               <div class="w-3 h-3 rounded-full bg-amber-400"></div>
@@ -62,44 +72,16 @@ import { m } from '../../paraglide/messages.js';
               {m.hero_mockup_url()}
             </div>
           </div>
-          <div class="flex-1 flex overflow-hidden">
-            <div class="w-5/12 border-r border-gray-200 p-6 bg-[#F3F4F6] overflow-hidden relative">
-              <div class="w-12 h-4 mb-4 bg-gray-300 rounded-full animate-pulse"></div>
-              <div class="w-full h-3 mb-2 bg-[#E18914]/30 rounded-full"></div>
-              <div class="w-[80%] h-3 mb-6 bg-gray-300 rounded-full"></div>
-              <div class="absolute bottom-6 left-6 right-6 p-4 bg-white rounded-xl shadow-sm border border-green-100">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex justify-center items-center">
-                    <Check size={16} />
-                  </div>
-                  <h4 class="text-sm font-bold text-[#2D2D2D]">{m.hero_mission_complete()}</h4>
-                </div>
-                <p class="text-xs text-gray-500">{m.hero_mission_desc()}</p>
-              </div>
-            </div>
-            <div class="w-7/12 bg-[#2D2D2D] p-4 relative flex items-center justify-center overflow-hidden">
-              <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat"></div>
-              <div class="relative z-10 flex flex-col gap-4 items-center">
-                <div class="w-48 h-12 bg-gray-100 rounded-md flex p-1 justify-center gap-1 shadow-inner">
-                  {Array.from({ length: 10 }).map((_, i) => (
-                    <div class="flex flex-col gap-1 justify-center">
-                      <div class="w-2 h-2 rounded-full bg-gray-300 shadow-inner"></div>
-                      <div class="w-2 h-2 rounded-full bg-gray-300 shadow-inner"></div>
-                    </div>
-                  ))}
-                </div>
-                <div class="w-40 h-28 bg-[#1D8536] rounded-md shadow-lg relative border border-green-700/50">
-                  <div class="absolute top-2 left-2 w-8 h-8 bg-gray-300 rounded-sm"></div>
-                  <div class="absolute bottom-2 left-2 w-6 h-6 bg-gray-800 rounded-full"></div>
-                  <div class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800 rounded flex items-center justify-center">
-                    <Cpu size={24} class="text-gray-500" />
-                  </div>
-                  <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,1)] animate-pulse"></div>
-                </div>
-                <div class="absolute left-[40%] top-[40%] w-[30%] h-1 bg-red-500 rounded-full transform -rotate-45 z-0 shadow-sm"></div>
-                <div class="absolute left-[45%] top-[55%] w-[25%] h-1 bg-black rounded-full transform -rotate-12 z-0 shadow-sm"></div>
-              </div>
-            </div>
+          <div class="relative overflow-hidden bg-white" style={`aspect-ratio: ${aspectRatio}`}>
+            {screenshots.map((shot, i) => (
+              <img
+                src={shot.src.src}
+                alt={shot.alt}
+                width={shot.src.width}
+                height={shot.src.height}
+                class="absolute inset-0 w-full h-full object-contain hero-screenshot-img"
+              />
+            ))}
           </div>
         </div>
         <div class="absolute -bottom-6 -right-6 bg-white border-2 border-[#1D8536] text-[#1D8536] px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce">
@@ -113,3 +95,32 @@ import { m } from '../../paraglide/messages.js';
     </div>
   </div>
 </section>
+
+<style>
+  .hero-screenshot-img {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+  .hero-screenshot-img:nth-child(1) {
+    animation: hero-cycle-1 12s infinite;
+  }
+  .hero-screenshot-img:nth-child(2) {
+    animation: hero-cycle-2 12s infinite;
+  }
+  .hero-screenshot-img:nth-child(3) {
+    animation: hero-cycle-3 12s infinite;
+  }
+  @keyframes hero-cycle-1 {
+    0%, 31% { opacity: 1; }
+    33%, 100% { opacity: 0; }
+  }
+  @keyframes hero-cycle-2 {
+    0%, 31% { opacity: 0; }
+    33%, 64% { opacity: 1; }
+    66%, 100% { opacity: 0; }
+  }
+  @keyframes hero-cycle-3 {
+    0%, 64% { opacity: 0; }
+    66%, 100% { opacity: 1; }
+  }
+</style>
