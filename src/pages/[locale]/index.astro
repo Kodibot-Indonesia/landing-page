@@ -14,6 +14,7 @@ import Pricing from '../../components/landing/Pricing.astro';
 import FAQ from '../../components/landing/FAQ.astro';
 import CTA from '../../components/landing/CTA.astro';
 import Footer from '../../components/landing/Footer.astro';
+import WhatsAppFloating from '../../components/landing/WhatsAppFloating.astro';
 import { m } from '../../paraglide/messages.js';
 
 export function getStaticPaths() {
@@ -48,6 +49,7 @@ const faqItems = [
     <Pricing />
     <FAQ />
     <CTA />
-    <Footer />
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
   </div>
 </Layout>

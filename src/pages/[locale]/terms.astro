@@ -1,0 +1,116 @@
+---
+import { locales } from '../../paraglide/runtime.js';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/landing/Nav.astro';
+import Footer from '../../components/landing/Footer.astro';
+import WhatsAppFloating from '../../components/landing/WhatsAppFloating.astro';
+import { m } from '../../paraglide/messages.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const lang = locale || 'en';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+const canonicalURL = `${siteUrl}/${lang}/terms/`;
+const pageTitle = `${m.footer_terms()} – Kodibot`;
+const pageDescription = 'Terms of Service for Kodibot Learning Platform. Please read these terms before using our services.';
+
+const content = {
+  en: {
+    lastUpdated: 'Last updated: March 2025',
+    intro: 'Welcome to Kodibot. By accessing or using our platform at kodibot.id, you agree to be bound by these Terms of Service. If you are a parent or guardian registering on behalf of a minor, you accept these terms on their behalf.',
+    s1_title: '1. Acceptance of Terms',
+    s1_content: 'By creating an account or using our services, you agree to comply with these terms. You must be at least 18 years old or have parental consent to create an account. Accounts for learners under 13 must be created by a parent or guardian.',
+    s2_title: '2. Use of Service',
+    s2_content: 'Our platform provides coding and STEM learning content for children. You agree to use the service only for lawful, educational purposes. You may not share account credentials, attempt to circumvent security measures, or misuse the platform in any way.',
+    s3_title: '3. Payment and Refunds',
+    s3_content: 'Paid plans are subject to the pricing displayed at the time of purchase. Refund policies are described during checkout. We reserve the right to modify pricing with advance notice.',
+    s4_title: '4. Intellectual Property',
+    s4_content: 'All content, including courses, simulations, and materials, is owned by Kodibot or its licensors. You may not copy, distribute, or create derivative works without our written permission.',
+    s5_title: '5. Limitation of Liability',
+    s5_content: 'Kodibot is provided "as is." We are not liable for indirect, incidental, or consequential damages arising from use of our platform.',
+    s6_title: '6. Contact',
+    s6_content: 'For questions about these terms, contact us at hello@kodibot.id.',
+  },
+  id: {
+    lastUpdated: 'Terakhir diperbarui: Maret 2025',
+    intro: 'Selamat datang di Kodibot. Dengan mengakses atau menggunakan platform kami di kodibot.id, Anda setuju terikat oleh Ketentuan Layanan ini. Jika Anda adalah orang tua atau wali yang mendaftarkan atas nama anak di bawah umur, Anda menerima ketentuan ini atas nama mereka.',
+    s1_title: '1. Penerimaan Ketentuan',
+    s1_content: 'Dengan membuat akun atau menggunakan layanan kami, Anda setuju untuk mematuhi ketentuan ini. Anda harus berusia minimal 18 tahun atau memiliki persetujuan orang tua untuk membuat akun. Akun untuk peserta di bawah 13 tahun harus dibuat oleh orang tua atau wali.',
+    s2_title: '2. Penggunaan Layanan',
+    s2_content: 'Platform kami menyediakan konten pembelajaran coding dan STEM untuk anak. Anda setuju menggunakan layanan hanya untuk tujuan yang sah dan edukatif. Anda tidak boleh membagikan kredensial akun, mencoba menembus keamanan, atau menyalahgunakan platform.',
+    s3_title: '3. Pembayaran dan Pengembalian Dana',
+    s3_content: 'Paket berbayar mengikuti harga yang ditampilkan pada saat pembelian. Kebijakan pengembalian dijelaskan saat checkout. Kami berhak mengubah harga dengan pemberitahuan sebelumnya.',
+    s4_title: '4. Kekayaan Intelektual',
+    s4_content: 'Semua konten, termasuk kursus, simulator, dan materi, merupakan milik Kodibot atau pemberi lisensi. Anda tidak boleh menyalin, mendistribusikan, atau membuat karya turunan tanpa izin tertulis kami.',
+    s5_title: '5. Batasan Tanggung Jawab',
+    s5_content: 'Kodibot disediakan "sebagaimana adanya". Kami tidak bertanggung jawab atas kerugian tidak langsung, insidental, atau konsekuensial yang timbul dari penggunaan platform kami.',
+    s6_title: '6. Hubungi Kami',
+    s6_content: 'Untuk pertanyaan tentang ketentuan ini, hubungi kami di hello@kodibot.id.',
+  },
+  ms: {
+    lastUpdated: 'Kemas kini terakhir: Mac 2025',
+    intro: 'Selamat datang ke Kodibot. Dengan mengakses atau menggunakan platform kami di kodibot.id, anda bersetuju terikat dengan Terma Perkhidmatan ini. Jika anda ibu bapa atau penjaga yang mendaftar bagi pihak kanak-kanak bawah umur, anda menerima terma ini bagi pihak mereka.',
+    s1_title: '1. Penerimaan Terma',
+    s1_content: 'Dengan mencipta akaun atau menggunakan perkhidmatan kami, anda bersetuju mematuhi terma ini. Anda mestilah berumur sekurang-kurangnya 18 tahun atau mempunyai persetujuan ibu bapa untuk mencipta akaun. Akaun untuk pelajar bawah 13 tahun mesti dicipta oleh ibu bapa atau penjaga.',
+    s2_title: '2. Penggunaan Perkhidmatan',
+    s2_content: 'Platform kami menyediakan kandungan pembelajaran pengaturcaraan dan STEM untuk kanak-kanak. Anda bersetuju menggunakan perkhidmatan hanya untuk tujuan yang sah dan pendidikan. Anda tidak boleh berkongsi kredensial akaun, cuba memintas langkah keselamatan, atau menyalahgunakan platform.',
+    s3_title: '3. Pembayaran dan Bayaran Balik',
+    s3_content: 'Pelan berbayar tertakluk kepada harga yang dipaparkan pada masa pembelian. Dasar bayaran balik diterangkan semasa checkout. Kami berhak mengubah suai harga dengan notis terlebih dahulu.',
+    s4_title: '4. Harta Intelek',
+    s4_content: 'Semua kandungan, termasuk kursus, simulator, dan bahan, dimiliki oleh Kodibot atau pemberi lesen. Anda tidak boleh menyalin, mengedarkan, atau mencipta karya terbitan tanpa kebenaran bertulis kami.',
+    s5_title: '5. Had Liabiliti',
+    s5_content: 'Kodibot disediakan "sebagaimana adanya". Kami tidak bertanggungjawab atas kerosakan tidak langsung, insidental, atau konsekuensial yang timbul daripada penggunaan platform kami.',
+    s6_title: '6. Hubungi Kami',
+    s6_content: 'Untuk pertanyaan tentang terma ini, hubungi kami di hello@kodibot.id.',
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.en;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang} canonicalURL={canonicalURL}>
+  <div class="min-h-screen bg-[#F3F4F6] font-sans">
+    <Nav currentLocale={lang} />
+    <main class="pt-24 pb-16 px-4">
+      <div class="max-w-3xl mx-auto">
+        <a href={`/${lang}/`} class="inline-flex items-center gap-2 text-[#6B7280] hover:text-[#E18914] text-sm font-medium mb-8 transition-colors">
+          ← Back to Home
+        </a>
+        <h1 class="text-3xl font-bold text-[#2D2D2D] mb-2">{m.footer_terms()}</h1>
+        <p class="text-[#6B7280] text-sm mb-12">{c.lastUpdated}</p>
+        <div class="prose prose-gray max-w-none space-y-8 text-[#4B5563]">
+          <p class="leading-relaxed">{c.intro}</p>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s1_title}</h2>
+            <p class="leading-relaxed">{c.s1_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s2_title}</h2>
+            <p class="leading-relaxed">{c.s2_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s3_title}</h2>
+            <p class="leading-relaxed">{c.s3_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s4_title}</h2>
+            <p class="leading-relaxed">{c.s4_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s5_title}</h2>
+            <p class="leading-relaxed">{c.s5_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s6_title}</h2>
+            <p class="leading-relaxed">{c.s6_content}</p>
+          </section>
+        </div>
+      </div>
+    </main>
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
+  </div>
+</Layout>

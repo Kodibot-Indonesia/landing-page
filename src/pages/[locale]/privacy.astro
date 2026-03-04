@@ -1,0 +1,96 @@
+---
+import { locales } from '../../paraglide/runtime.js';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/landing/Nav.astro';
+import Footer from '../../components/landing/Footer.astro';
+import WhatsAppFloating from '../../components/landing/WhatsAppFloating.astro';
+import { m } from '../../paraglide/messages.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const lang = locale || 'en';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+const canonicalURL = `${siteUrl}/${lang}/privacy/`;
+const pageTitle = `${m.footer_privacy()} – Kodibot`;
+const pageDescription = 'Privacy Policy for Kodibot Learning Platform. We protect your and your child\'s data.';
+
+const content = {
+  en: {
+    lastUpdated: 'Last updated: March 2025',
+    intro: 'Kodibot ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you or your child use our learning platform at kodibot.id.',
+    s1_title: '1. Information We Collect',
+    s1_content: 'We may collect information that you provide directly, including account registration data (name, email, parent/guardian contact), child\'s learning progress, and usage data within our platform. We do not sell personal information to third parties.',
+    s2_title: '2. How We Use Your Information',
+    s2_content: 'We use collected information to provide and improve our services, personalize learning content, communicate with parents about progress, and ensure platform security. We comply with applicable data protection regulations including COPPA where relevant.',
+    s3_title: '3. Data Security',
+    s3_content: 'We implement appropriate technical and organizational measures to protect personal data against unauthorized access, alteration, disclosure, or destruction.',
+    s4_title: '4. Contact Us',
+    s4_content: 'For privacy-related questions, please contact us at hello@kodibot.id.',
+  },
+  id: {
+    lastUpdated: 'Terakhir diperbarui: Maret 2025',
+    intro: 'Kodibot ("kami") berkomitmen melindungi privasi Anda. Kebijakan Privasi ini menjelaskan cara kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi ketika Anda atau anak Anda menggunakan platform pembelajaran kami di kodibot.id.',
+    s1_title: '1. Informasi yang Kami Kumpulkan',
+    s1_content: 'Kami dapat mengumpulkan informasi yang Anda berikan secara langsung, termasuk data registrasi akun (nama, email, kontak orang tua/wali), kemajuan belajar anak, dan data penggunaan dalam platform kami. Kami tidak menjual informasi pribadi kepada pihak ketiga.',
+    s2_title: '2. Cara Kami Menggunakan Informasi Anda',
+    s2_content: 'Kami menggunakan informasi untuk menyediakan dan meningkatkan layanan, mempersonalisasi konten pembelajaran, berkomunikasi dengan orang tua tentang progres, dan memastikan keamanan platform. Kami mematuhi regulasi perlindungan data yang berlaku.',
+    s3_title: '3. Keamanan Data',
+    s3_content: 'Kami menerapkan langkah teknis dan organisasional yang sesuai untuk melindungi data pribadi dari akses, perubahan, pengungkapan, atau penghancuran yang tidak sah.',
+    s4_title: '4. Hubungi Kami',
+    s4_content: 'Untuk pertanyaan terkait privasi, silakan hubungi kami di hello@kodibot.id.',
+  },
+  ms: {
+    lastUpdated: 'Kemas kini terakhir: Mac 2025',
+    intro: 'Kodibot ("kami") berkomitmen melindungi privasi anda. Dasar Privasi ini menerangkan bagaimana kami mengumpulkan, menggunakan, mendedahkan, dan melindungi maklumat apabila anda atau anak anda menggunakan platform pembelajaran kami di kodibot.id.',
+    s1_title: '1. Maklumat yang Kami Kumpulkan',
+    s1_content: 'Kami boleh mengumpulkan maklumat yang anda berikan secara langsung, termasuk data pendaftaran akaun (nama, e-mel, kenalan ibu bapa/penjaga), kemajuan pembelajaran kanak-kanak, dan data penggunaan dalam platform kami. Kami tidak menjual maklumat peribadi kepada pihak ketiga.',
+    s2_title: '2. Cara Kami Menggunakan Maklumat Anda',
+    s2_content: 'Kami menggunakan maklumat untuk menyediakan dan meningkatkan perkhidmatan, mempersonalisasikan kandungan pembelajaran, berkomunikasi dengan ibu bapa tentang kemajuan, dan memastikan keselamatan platform. Kami mematuhi peraturan perlindungan data yang berkenaan.',
+    s3_title: '3. Keselamatan Data',
+    s3_content: 'Kami melaksanakan langkah teknikal dan organisasi yang sesuai untuk melindungi data peribadi daripada akses, perubahan, pendedahan, atau pemusnahan tanpa kebenaran.',
+    s4_title: '4. Hubungi Kami',
+    s4_content: 'Untuk pertanyaan berkaitan privasi, sila hubungi kami di hello@kodibot.id.',
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.en;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang} canonicalURL={canonicalURL}>
+  <div class="min-h-screen bg-[#F3F4F6] font-sans">
+    <Nav currentLocale={lang} />
+    <main class="pt-24 pb-16 px-4">
+      <div class="max-w-3xl mx-auto">
+        <a href={`/${lang}/`} class="inline-flex items-center gap-2 text-[#6B7280] hover:text-[#E18914] text-sm font-medium mb-8 transition-colors">
+          ← Back to Home
+        </a>
+        <h1 class="text-3xl font-bold text-[#2D2D2D] mb-2">{m.footer_privacy()}</h1>
+        <p class="text-[#6B7280] text-sm mb-12">{c.lastUpdated}</p>
+        <div class="prose prose-gray max-w-none space-y-8 text-[#4B5563]">
+          <p class="leading-relaxed">{c.intro}</p>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s1_title}</h2>
+            <p class="leading-relaxed">{c.s1_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s2_title}</h2>
+            <p class="leading-relaxed">{c.s2_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s3_title}</h2>
+            <p class="leading-relaxed">{c.s3_content}</p>
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-[#2D2D2D] mb-3">{c.s4_title}</h2>
+            <p class="leading-relaxed">{c.s4_content}</p>
+          </section>
+        </div>
+      </div>
+    </main>
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
+  </div>
+</Layout>

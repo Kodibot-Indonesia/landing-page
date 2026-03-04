@@ -113,7 +113,10 @@
   "footer_privacy": "Privacy Policy",
   "footer_terms": "Terms of Service",
   "footer_contact": "Contact",
-  "footer_copyright": "Kodibot Learning Platform. Platform Belajar Coding & Arduino untuk Anak Indonesia.",
+  "footer_contact_email": "Email",
+  "footer_contact_whatsapp": "WhatsApp",
+  "whatsapp_floating_tooltip": "Ada pertanyaan? Konsultasi gratis — chat sekarang!",
+  "footer_copyright": "Kodibot Learning Platform. Platform Belajar Coding & Arduino untuk Anak.",
   "meta_title": "KODIBOT – Platform Belajar Coding & STEM untuk Anak 8–15 Tahun",
   "meta_description": "Belajar coding dan Arduino dari nol dengan simulator interaktif. Tanpa perlu beli alat. Cocok untuk anak usia 8–15 tahun. Coba gratis sekarang.",
   "meta_keywords": "belajar coding untuk anak, kursus coding anak online, belajar Arduino untuk anak, platform STEM anak, coding untuk pemula anak"
