@@ -42,55 +42,59 @@ const hreflangMap: Record<string, string> = {
         var path = window.location.pathname;
         var referrer = document.referrer || "";
         var cameFromLocalePage = /\/(id|ms)(\/|$)/.test(referrer);
-        
+
         // Only run detection on root path or when coming from external links
         if (path !== "/" && !cameFromLocalePage) {
-          document.cookie =
-            LOCALE_COOKIE +
-            "=" +
-            (lang || "en") +
-            ";path=/;max-age=31536000;samesite=lax";
+          if (lang) {
+            document.cookie =
+              LOCALE_COOKIE +
+              "=" +
+              lang +
+              ";path=/;max-age=31536000;samesite=lax";
+          }
           return;
         }
-        
-        // Save current locale preference
+
+        // Save current locale preference from rendered page
         if (lang) {
           document.cookie =
             LOCALE_COOKIE + "=" + lang + ";path=/;max-age=31536000;samesite=lax";
         }
-        
-        // If user is already on a locale page, no need to redirect
+
+        // If user is already on a non-default locale page, no need to redirect
         if (/^(\/id|\/ms)/.test(path)) {
           return;
         }
-        
+
         // Check if user has a saved preference
         var cookie = document.cookie.match(
           new RegExp(LOCALE_COOKIE + "=([^;]+)"),
         );
         var preferred = cookie ? cookie[1].toLowerCase() : null;
-        
+
         // If user has saved preference for id or ms, redirect them
         if (preferred === "id" || preferred === "ms") {
           window.location.replace("/" + preferred + "/");
           return;
         }
-        
-        // Detect from browser language
-        var navLang = (navigator.language || navigator.userLanguage || "")
-          .toLowerCase()
-          .split("-")[0];
-        
-        if (navLang === "id" || navLang === "ms") {
-          document.cookie =
-            LOCALE_COOKIE +
-            "=" +
-            navLang +
-            ";path=/;max-age=31536000;samesite=lax";
-          window.location.replace("/" + navLang + "/");
-        } else {
-          document.cookie =
-            LOCALE_COOKIE + "=en;path=/;max-age=31536000;samesite=lax";
+
+        // If user has no saved preference yet, fall back to browser language
+        if (!preferred) {
+          var navLang = (navigator.language || navigator.userLanguage || "")
+            .toLowerCase()
+            .split("-")[0];
+
+          if (navLang === "id" || navLang === "ms") {
+            document.cookie =
+              LOCALE_COOKIE +
+              "=" +
+              navLang +
+              ";path=/;max-age=31536000;samesite=lax";
+            window.location.replace("/" + navLang + "/");
+          } else {
+            document.cookie =
+              LOCALE_COOKIE + "=en;path=/;max-age=31536000;samesite=lax";
+          }
         }
       })();
     </script>
