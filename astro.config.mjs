@@ -12,10 +12,9 @@ export default defineConfig({
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'id', 'ms'],
-    routing: { prefixDefaultLocale: true },
+    routing: { prefixDefaultLocale: false },
   },
   integrations: [tailwind(), sitemap()],
-  redirects: { '/': '/en/' },
   vite: {
     plugins: [
       paraglideVitePlugin({
