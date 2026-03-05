@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/landing/Nav.astro';
+import Hero from '../components/landing/Hero.astro';
+import Problem from '../components/landing/Problem.astro';
+import Solution from '../components/landing/Solution.astro';
+import HowItWorks from '../components/landing/HowItWorks.astro';
+import Simulator from '../components/landing/Simulator.astro';
+import LearningPath from '../components/landing/LearningPath.astro';
+import Outcome from '../components/landing/Outcome.astro';
+import Comparison from '../components/landing/Comparison.astro';
+import Pricing from '../components/landing/Pricing.astro';
+import FAQ from '../components/landing/FAQ.astro';
+import CTA from '../components/landing/CTA.astro';
+import Footer from '../components/landing/Footer.astro';
+import WhatsAppFloating from '../components/landing/WhatsAppFloating.astro';
+import { m } from '../paraglide/messages.js';
+import { locales } from '../paraglide/runtime.js';
+
+const lang = 'en';
+const siteUrl = 'https://kodibot.id';
+const canonicalURL = `${siteUrl}/`;
+const hreflangAlternates = locales.map((l) => ({ locale: l, url: `${siteUrl}/${l}/` }));
+const faqItems = [
+  { question: m.faq_q1(), answer: m.faq_a1() },
+  { question: m.faq_q2(), answer: m.faq_a2() },
+  { question: m.faq_q3(), answer: m.faq_a3() },
+  { question: m.faq_q4(), answer: m.faq_a4() },
+  { question: m.faq_q5(), answer: m.faq_a5() },
+];
+---
+
+<Layout title={m.meta_title()} description={m.meta_description()} lang={lang} canonicalURL={canonicalURL} hreflangAlternates={hreflangAlternates} faqItems={faqItems}>
+  <div class="min-h-screen bg-[#F3F4F6] font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
+    <Nav currentLocale={lang} />
+    <Hero />
+    <Problem />
+    <Solution />
+    <HowItWorks />
+    <Simulator />
+    <LearningPath />
+    <Outcome />
+    <Comparison />
+    <Pricing />
+    <FAQ />
+    <CTA />
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
+  </div>
+</Layout>
