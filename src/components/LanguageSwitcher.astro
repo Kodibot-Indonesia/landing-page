@@ -40,7 +40,7 @@ const localeLabels: Record<string, string> = {
       <span class="text-xs font-semibold uppercase tracking-wider text-[#6B7280]">Language</span>
     </div>
     {locales.map((locale) => {
-      const href = `/${locale}${pathSuffix}`;
+      const href = locale === 'en' ? `/${pathSuffix}` : `/${locale}${pathSuffix}`;
       const isActive = currentLocale === locale;
       return (
         <a
