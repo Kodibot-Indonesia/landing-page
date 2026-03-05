@@ -188,6 +188,7 @@ const hreflangMap: Record<string, string> = {
             "@type": "WebSite",
             name: "Kodibot",
             url: siteUrl,
+            inLanguage: lang,
             potentialAction: {
               "@type": "SearchAction",
               target: {
@@ -201,6 +202,7 @@ const hreflangMap: Record<string, string> = {
             ? [
                 {
                   "@type": "FAQPage",
+                  inLanguage: lang,
                   mainEntity: faqItems.map((item) => ({
                     "@type": "Question",
                     name: item.question,

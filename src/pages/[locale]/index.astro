@@ -25,7 +25,10 @@ const { locale } = Astro.params;
 const lang = locale || 'en';
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
 const canonicalURL = `${siteUrl}/${lang}/`;
-const hreflangAlternates = locales.map((l) => ({ locale: l, url: `${siteUrl}/${l}/` }));
+const hreflangAlternates = locales.map((l) => ({
+  locale: l,
+  url: l === 'en' ? `${siteUrl}/` : `${siteUrl}/${l}/`,
+}));
 const faqItems = [
   { question: m.faq_q1(), answer: m.faq_a1() },
   { question: m.faq_q2(), answer: m.faq_a2() },

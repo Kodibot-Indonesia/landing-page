@@ -20,7 +20,10 @@ import { locales } from '../paraglide/runtime.js';
 const lang = 'en';
 const siteUrl = 'https://kodibot.id';
 const canonicalURL = `${siteUrl}/`;
-const hreflangAlternates = locales.map((l) => ({ locale: l, url: `${siteUrl}/${l}/` }));
+const hreflangAlternates = locales.map((l) => ({
+  locale: l,
+  url: l === 'en' ? `${siteUrl}/` : `${siteUrl}/${l}/`,
+}));
 const faqItems = [
   { question: m.faq_q1(), answer: m.faq_a1() },
   { question: m.faq_q2(), answer: m.faq_a2() },
