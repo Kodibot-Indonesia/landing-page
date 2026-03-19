@@ -1,5 +1,6 @@
 ---
 import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
 ---
 
 <section class="relative py-24 bg-[#1D8536] overflow-hidden text-center">
@@ -21,7 +22,7 @@ import { m } from '../../paraglide/messages.js';
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
-        href="/register"
+        href={`${LMS_URL}/register`}
         class="w-full sm:w-auto bg-[#E18914] hover:bg-[#F9DB2B] hover:text-[#2D2D2D] text-white px-10 py-5 rounded-full text-xl font-bold transition-all shadow-[0_0_30px_rgba(225,137,20,0.5)] transform hover:scale-105"
       >
         {m.cta_button()}

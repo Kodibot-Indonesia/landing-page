@@ -1,6 +1,7 @@
 ---
 import { ArrowRight, CheckCircle2, PlayCircle, Sparkles, Target } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
 import scratchImg from '../../assets/screen/scratch.png';
 import makecodeImg from '../../assets/screen/makecode.png';
 import arduinoImg from '../../assets/screen/arduino.png';
@@ -38,7 +39,7 @@ const aspectRatio = scratchImg.width / scratchImg.height;
 
         <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms] mb-8">
           <a
-            href="/register"
+            href={`${LMS_URL}/register`}
             class="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:shadow-[#E18914]/30 hover:-translate-y-1"
           >
             {m.hero_cta_register()} <ArrowRight size={20} />
