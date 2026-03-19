@@ -1,6 +1,7 @@
 ---
 import { Gamepad2, Cpu, Lightbulb, Medal } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import kidCodingImg from '../../assets/images/kid-learning-coding.jpg';
 ---
 
 <section class="py-24 bg-[#E18914] text-white">
@@ -43,8 +44,11 @@ import { m } from '../../paraglide/messages.js';
       </div>
       <div class="relative flex justify-center">
         <img
-          src="https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80"
-          alt="Kid coding success"
+          src={kidCodingImg.src}
+          alt="Happy child learning coding and programming skills on laptop with parent supervision"
+          width={kidCodingImg.width}
+          height={kidCodingImg.height}
+          loading="lazy"
           class="rounded-3xl shadow-2xl rotate-3 scale-105 border-4 border-white"
         />
       </div>

@@ -6,6 +6,9 @@ interface Props {
   canonicalURL?: string;
   hreflangAlternates?: { locale: string; url: string }[];
   faqItems?: { question: string; answer: string }[];
+  courses?: { name: string; description: string; position: number }[];
+  products?: { name: string; price: string; priceCurrency: string; description: string }[];
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 const {
@@ -15,6 +18,18 @@ const {
   canonicalURL,
   hreflangAlternates,
   faqItems,
+  courses = [
+    { name: "Scratch Basics", description: "Learn looping, conditions, and variables through games and animations.", position: 1 },
+    { name: "MakeCode IoT", description: "Transition from screen to virtual physical devices. Sensor and Micro:bit interaction.", position: 2 },
+    { name: "Arduino Virtual", description: "Build circuits, breadboard, and structured C++ programming via visual blocks.", position: 3 },
+    { name: "Real-World Projects", description: "Ready for real hardware. Implement on physical Arduino without fear.", position: 4 },
+  ],
+  products = [
+    { name: "Monthly Plan", price: "99000", priceCurrency: "IDR", description: "30 days access to all curriculum" },
+    { name: "3 Months Plan", price: "149000", priceCurrency: "IDR", description: "90 days access to all curriculum" },
+    { name: "Founding Member", price: "349000", priceCurrency: "IDR", description: "Lifetime access to all curriculum" },
+  ],
+  breadcrumbs = [{ name: "Home", url: "/" }],
 } = Astro.props;
 const siteUrl =
   Astro.site?.toString().replace(/\/$/, "") || "https://kodibot.id";
@@ -99,8 +114,12 @@ const hreflangMap: Record<string, string> = {
       })();
     </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Kodibot" />
+    <meta name="geo.region" content="ID" />
+    <meta name="geo.placename" content="Indonesia" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -183,6 +202,11 @@ const hreflangMap: Record<string, string> = {
             name: "Kodibot",
             url: siteUrl,
             logo: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "customer service",
+              availableLanguage: ["Indonesian", "English"],
+            },
           },
           {
             "@type": "WebSite",
@@ -198,6 +222,50 @@ const hreflangMap: Record<string, string> = {
               "query-input": "required name=search_term_string",
             },
           },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs.map((item, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: item.name,
+              item: `${siteUrl}${item.url}`,
+            })),
+          },
+          ...courses.map((course) => ({
+            "@type": "Course",
+            name: course.name,
+            description: course.description,
+            provider: {
+              "@type": "Organization",
+              name: "Kodibot",
+              url: siteUrl,
+            },
+            inLanguage: lang,
+            educationalLevel: "Beginner",
+            audience: {
+              "@type": "Audience",
+              audienceType: "Kids 8-15",
+            },
+          })),
+          ...products.map((product) => ({
+            "@type": "Product",
+            name: product.name,
+            description: product.description,
+            brand: {
+              "@type": "Brand",
+              name: "Kodibot",
+            },
+            offers: {
+              "@type": "Offer",
+              price: product.price,
+              priceCurrency: product.priceCurrency,
+              availability: "https://schema.org/InStock",
+              seller: {
+                "@type": "Organization",
+                name: "Kodibot",
+              },
+            },
+          })),
           ...(faqItems && faqItems.length > 0
             ? [
                 {

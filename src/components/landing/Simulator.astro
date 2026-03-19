@@ -1,6 +1,7 @@
 ---
 import { Bot, CheckCircle2 } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import arduinoCircuitImg from '../../assets/images/arduino-circuit-board.jpg';
 ---
 
 <section class="py-24 bg-[#2D2D2D] text-white overflow-hidden relative">
@@ -39,8 +40,11 @@ import { m } from '../../paraglide/messages.js';
       <div class="relative">
         <div class="w-full aspect-square rounded-full bg-gradient-to-br from-[#1D8536] to-[#E18914] opacity-20 absolute -right-20 -bottom-20 blur-3xl"></div>
         <img
-          src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80"
-          alt="Arduino STEM Learning"
+          src={arduinoCircuitImg.src}
+          alt="Close-up of Arduino circuit board with electronic components for kids STEM learning"
+          width={arduinoCircuitImg.width}
+          height={arduinoCircuitImg.height}
+          loading="lazy"
           class="rounded-3xl shadow-2xl relative z-10 border border-gray-700"
         />
         <div class="absolute top-10 -left-10 bg-white text-[#2D2D2D] p-4 rounded-2xl shadow-2xl z-20 flex items-center gap-4 animate-bounce">
