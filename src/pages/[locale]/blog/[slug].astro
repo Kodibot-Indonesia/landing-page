@@ -15,8 +15,10 @@ export async function getStaticPaths() {
     });
     
     for (const post of posts) {
+      // Extract slug from id (e.g., "en/my-post.md" -> "my-post")
+      const slug = post.id.replace(new RegExp(`^${locale}/`), '').replace(/\.md$/, '');
       paths.push({
-        params: { locale, slug: post.slug },
+        params: { locale, slug },
         props: { post },
       });
     }
@@ -45,6 +47,21 @@ const formattedDate = post.data.pubDate.toLocaleDateString(
 
 // Blog listing URL
 const blogListUrl = lang === 'en' ? '/blog/' : `/${lang}/blog/`;
+
+// Calculate reading time (avg 200 words per minute)
+const wordCount = post.body?.split(/\s+/).length || 200;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Generate blog-specific OG image URL
+const ogSearchParams = new URLSearchParams();
+ogSearchParams.set('title', post.data.title);
+ogSearchParams.set('desc', post.data.description);
+ogSearchParams.set('author', post.data.author);
+if (post.data.category) ogSearchParams.set('category', post.data.category);
+ogSearchParams.set('readTime', readingTime.toString());
+ogSearchParams.set('date', formattedDate);
+ogSearchParams.set('lang', lang);
+const blogOgImage = `${siteUrl}/blog-og.png?${ogSearchParams.toString()}`;
 
 // Article schema for SEO
 const articleSchema = {
@@ -77,6 +94,7 @@ const articleSchema = {
   lang={lang}
   canonicalURL={blogUrl}
   hreflangAlternates={hreflangAlternates}
+  ogImage={blogOgImage}
 >
   <div class="min-h-screen bg-white font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
     <Nav currentLocale={lang} />
