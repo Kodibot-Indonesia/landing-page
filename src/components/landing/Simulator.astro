@@ -1,6 +1,7 @@
 ---
 import { Bot, CheckCircle2 } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
 import arduinoCircuitImg from '../../assets/images/arduino-circuit-board.jpg';
 ---
 
@@ -30,7 +31,7 @@ import arduinoCircuitImg from '../../assets/images/arduino-circuit-board.jpg';
           </li>
         </ul>
         <a
-          href="/register"
+          href={`${LMS_URL}/register`}
           class="inline-flex items-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-[0_0_20px_rgba(225,137,20,0.4)] hover:-translate-y-1"
         >
           {m.simulator_cta()}
