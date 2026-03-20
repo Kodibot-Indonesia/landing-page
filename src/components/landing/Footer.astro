@@ -22,6 +22,9 @@ import profileLogo from '../../assets/mascot/profile-kodibot.png';
       </a>
 
       <div class="flex flex-wrap gap-6 text-gray-400 font-medium">
+        <a href={currentLocale === 'en' ? '/blog/' : `/${currentLocale}/blog/`} class="hover:text-white transition-colors">
+          Blog
+        </a>
         <a href={`/${currentLocale}/privacy/`} class="hover:text-white transition-colors">
           {m.footer_privacy()}
         </a>

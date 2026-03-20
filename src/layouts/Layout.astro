@@ -171,6 +171,9 @@ const hreflangMap: Record<string, string> = {
     <!-- Canonical -->
     <link rel="canonical" href={url} />
 
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Kodibot Blog RSS Feed" href={`${siteUrl}/rss.xml`} />
+
     <!-- hreflang -->
     {
       hreflangAlternates?.map((alt) => (

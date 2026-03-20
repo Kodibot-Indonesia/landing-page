@@ -1,0 +1,127 @@
+---
+import { locales } from '../../../paraglide/runtime.js';
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/landing/Nav.astro';
+import Footer from '../../../components/landing/Footer.astro';
+import PostCard from '../../../components/blog/PostCard.astro';
+import WhatsAppFloating from '../../../components/landing/WhatsAppFloating.astro';
+import { m } from '../../../paraglide/messages.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const lang = locale || 'en';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+
+// Get all blog posts for this locale
+const allPosts = await getCollection('blog', ({ id }) => {
+  return id.startsWith(`${lang}/`);
+});
+
+// Sort by date, filter out drafts
+const posts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get unique categories
+const categories = [...new Set(posts.map((post) => post.data.category))];
+
+const canonicalURL = lang === 'en' ? `${siteUrl}/blog/` : `${siteUrl}/${lang}/blog/`;
+const hreflangAlternates = locales.map((l) => ({
+  locale: l,
+  url: l === 'en' ? `${siteUrl}/blog/` : `${siteUrl}/${l}/blog/`,
+}));
+
+const pageTitle = locale === 'id' ? 'Blog - Tips Coding & STEM untuk Anak' : 'Blog - Coding & STEM Tips for Kids';
+const pageDescription = locale === 'id' 
+  ? 'Artikel tentang pendidikan coding, Arduino, dan STEM untuk anak usia 8-15 tahun. Tips parenting dan tutorial programming.'
+  : 'Articles about coding education, Arduino, and STEM for kids aged 8-15. Parenting tips and programming tutorials.';
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang} canonicalURL={canonicalURL} hreflangAlternates={hreflangAlternates}>
+  <div class="min-h-screen bg-[#F3F4F6] font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
+    <Nav currentLocale={lang} />
+    
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 border border-[#1D8536]/20 text-[#1D8536] font-medium text-sm mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Kodibot Blog</span>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold text-[#2D2D2D] font-sans mb-4">
+            {locale === 'id' ? 'Tips Coding & STEM untuk Anak' : 'Coding & STEM Tips for Kids'}
+          </h1>
+          <p class="text-xl text-[#6B7280] max-w-2xl mx-auto">
+            {locale === 'id' 
+              ? 'Artikel tentang pendidikan coding, Arduino, dan STEM untuk anak usia 8-15 tahun'
+              : 'Articles about coding education, Arduino, and STEM for kids aged 8-15'}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {posts.length > 0 ? (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((post) => (
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate}
+                heroImage={post.data.heroImage}
+                author={post.data.author}
+                category={post.data.category}
+                tags={post.data.tags}
+                slug={post.slug}
+                locale={lang}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <p class="text-gray-500 text-lg">
+              {locale === 'id' ? 'Belum ada artikel dalam bahasa Indonesia.' : 'No articles available in this language yet.'}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-[#1D8536]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          {locale === 'id' ? 'Siap Mulai Belajar?' : 'Ready to Start Learning?'}
+        </h2>
+        <p class="text-white/80 mb-8">
+          {locale === 'id' 
+            ? 'Coba gratis 7 hari dan lihat anak Anda berubah menjadi kreator teknologi'
+            : 'Try 7 days free and watch your child become a tech creator'}
+        </p>
+        <a
+          href="https://app.kodibot.id/register"
+          class="inline-flex items-center gap-2 bg-[#E18914] hover:bg-[#F9DB2B] hover:text-[#2D2D2D] text-white px-8 py-4 rounded-full text-lg font-bold transition-all"
+        >
+          {locale === 'id' ? 'Coba Gratis' : 'Start Free Trial'}
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
+  </div>
+</Layout>

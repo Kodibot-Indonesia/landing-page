@@ -1,0 +1,230 @@
+---
+import { locales } from '../../../paraglide/runtime.js';
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/landing/Nav.astro';
+import Footer from '../../../components/landing/Footer.astro';
+import WhatsAppFloating from '../../../components/landing/WhatsAppFloating.astro';
+
+export async function getStaticPaths() {
+  const paths = [];
+  
+  for (const locale of locales) {
+    const posts = await getCollection('blog', ({ id }) => {
+      return id.startsWith(`${locale}/`);
+    });
+    
+    for (const post of posts) {
+      paths.push({
+        params: { locale, slug: post.slug },
+        props: { post },
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { locale, slug } = Astro.params;
+const { post } = Astro.props;
+const lang = locale || 'en';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://kodibot.id';
+
+const { Content } = await post.render();
+
+const blogUrl = lang === 'en' ? `${siteUrl}/blog/${slug}/` : `${siteUrl}/${lang}/blog/${slug}/`;
+const hreflangAlternates = locales.map((l) => ({
+  locale: l,
+  url: l === 'en' ? `${siteUrl}/blog/${slug}/` : `${siteUrl}/${l}/blog/${slug}/`,
+}));
+
+const formattedDate = post.data.pubDate.toLocaleDateString(
+  lang === 'id' ? 'id-ID' : lang === 'ms' ? 'ms-MY' : 'en-US',
+  { year: 'numeric', month: 'long', day: 'numeric' }
+);
+
+// Blog listing URL
+const blogListUrl = lang === 'en' ? '/blog/' : `/${lang}/blog/`;
+
+// Article schema for SEO
+const articleSchema = {
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.heroImage ? `${siteUrl}${post.data.heroImage}` : undefined,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: post.data.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Kodibot",
+    url: siteUrl,
+    logo: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": blogUrl,
+  },
+};
+---
+
+<Layout 
+  title={`${post.data.title} | Kodibot Blog`}
+  description={post.data.description}
+  lang={lang}
+  canonicalURL={blogUrl}
+  hreflangAlternates={hreflangAlternates}
+>
+  <div class="min-h-screen bg-white font-sans selection:bg-[#F9DB2B]/30 selection:text-[#2D2D2D]">
+    <Nav currentLocale={lang} />
+    
+    <!-- Article Header -->
+    <article class="pt-32 pb-8">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8">
+          <ol class="flex items-center gap-2 text-sm text-gray-500">
+            <li><a href={lang === 'en' ? '/' : `/${lang}/`} class="hover:text-[#E18914]">Home</a></li>
+            <li>/</li>
+            <li><a href={blogListUrl} class="hover:text-[#E18914]">Blog</a></li>
+            <li>/</li>
+            <li class="text-[#2D2D2D] truncate max-w-[200px]">{post.data.title}</li>
+          </ol>
+        </nav>
+
+        <!-- Category & Date -->
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-[#F9DB2B]/20 text-[#B89E00] text-sm font-semibold rounded-full uppercase tracking-wide">
+            {post.data.category}
+          </span>
+          <span class="text-gray-500">{formattedDate}</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl lg:text-4xl font-bold text-[#2D2D2D] font-sans mb-4 leading-tight">
+          {post.data.title}
+        </h1>
+
+        <!-- Description -->
+        <p class="text-xl text-[#6B7280] mb-6">
+          {post.data.description}
+        </p>
+
+        <!-- Author & Tags -->
+        <div class="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-gray-200">
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-[#E18914] flex items-center justify-center text-white font-bold">
+              {post.data.author.charAt(0)}
+            </div>
+            <div>
+              <p class="font-semibold text-[#2D2D2D]">{post.data.author}</p>
+              <p class="text-sm text-gray-500">Author</p>
+            </div>
+          </div>
+          {post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 ml-auto">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Hero Image -->
+        {post.data.heroImage && (
+          <div class="mb-8 rounded-2xl overflow-hidden">
+            <img
+              src={post.data.heroImage}
+              alt={post.data.title}
+              class="w-full h-auto"
+            />
+          </div>
+        )}
+      </div>
+
+      <!-- Content -->
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-lg max-w-none prose-headings:font-sans prose-headings:text-[#2D2D2D] prose-a:text-[#E18914] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
+          <Content />
+        </div>
+      </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-[#F3F4F6] mt-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[#2D2D2D] mb-4">
+          {lang === 'id' ? 'Siap Mulai Belajar?' : 'Ready to Start Learning?'}
+        </h2>
+        <p class="text-[#6B7280] mb-8">
+          {lang === 'id' 
+            ? 'Coba gratis 7 hari platform coding Kodibot'
+            : 'Try Kodibot coding platform free for 7 days'}
+        </p>
+        <a
+          href="https://app.kodibot.id/register"
+          class="inline-flex items-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all"
+        >
+          {lang === 'id' ? 'Coba Gratis' : 'Start Free Trial'}
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <Footer currentLocale={lang} />
+    <WhatsAppFloating />
+  </div>
+
+  <!-- Article Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    ...articleSchema
+  })} />
+</Layout>
+
+<style>
+  .prose h1 {
+    display: none;
+  }
+  .prose h2 {
+    @apply text-2xl font-bold mt-8 mb-4;
+  }
+  .prose h3 {
+    @apply text-xl font-bold mt-6 mb-3;
+  }
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+  .prose li {
+    @apply mb-2;
+  }
+  .prose code {
+    @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm;
+  }
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto mb-4;
+  }
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-[#F9DB2B] pl-4 italic text-gray-600 my-4;
+  }
+  .prose a {
+    @apply text-[#E18914] font-medium;
+  }
+  .prose hr {
+    @apply my-8 border-gray-200;
+  }
+</style>

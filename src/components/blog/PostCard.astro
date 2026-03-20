@@ -1,0 +1,84 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  heroImage?: string;
+  author: string;
+  category: string;
+  tags: string[];
+  slug: string;
+  locale: string;
+}
+
+const { title, description, pubDate, heroImage, author, category, tags, slug, locale } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString(locale === 'id' ? 'id-ID' : locale === 'ms' ? 'ms-MY' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const blogUrl = locale === 'en' ? `/blog/${slug}` : `/${locale}/blog/${slug}`;
+---
+
+<article class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+  <a href={blogUrl} class="block">
+    {heroImage ? (
+      <div class="aspect-video overflow-hidden">
+        <img
+          src={heroImage}
+          alt={title}
+          loading="lazy"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+    ) : (
+      <div class="aspect-video bg-gradient-to-br from-[#F9DB2B] to-[#E18914] flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+      </div>
+    )}
+    
+    <div class="p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="px-3 py-1 bg-[#F9DB2B]/20 text-[#B89E00] text-xs font-semibold rounded-full uppercase tracking-wide">
+          {category}
+        </span>
+        <span class="text-gray-400 text-sm">{formattedDate}</span>
+      </div>
+      
+      <h3 class="text-xl font-bold text-[#2D2D2D] mb-2 group-hover:text-[#E18914] transition-colors line-clamp-2">
+        {title}
+      </h3>
+      
+      <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+        {description}
+      </p>
+      
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-500">By {author}</span>
+        <span class="text-[#E18914] font-semibold text-sm group-hover:translate-x-1 transition-transform">
+          Read more →
+        </span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
