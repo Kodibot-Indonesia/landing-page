@@ -1,49 +1,55 @@
 ---
-import { CheckCircle2, Star } from '@lucide/astro';
+import { CheckCircle2, Star, BookOpen } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
 import { LMS_URL } from '../../lib/config.js';
 
-const plans = [
-  {
-    id: 'monthly',
-    name: m.pricing_monthly_name(),
-    price: m.pricing_monthly_price(),
-    duration: m.pricing_monthly_duration(),
-    featured: false,
-  },
-  {
-    id: '3month',
-    name: m.pricing_3month_name(),
-    price: m.pricing_3month_price(),
-    duration: m.pricing_3month_duration(),
-    savings: m.pricing_3month_savings(),
-    featured: false,
-  },
-  {
-    id: 'lifetime',
-    name: m.pricing_lifetime_name(),
-    price: m.pricing_lifetime_price(),
-    duration: m.pricing_lifetime_duration(),
-    badge: m.pricing_lifetime_badge(),
-    slot: m.pricing_lifetime_slot(),
-    featured: true,
-  },
-];
+const foundingMember = {
+  name: m.pricing_lifetime_name(),
+  price: m.pricing_lifetime_price(),
+  duration: m.pricing_lifetime_duration(),
+  badge: m.pricing_lifetime_badge(),
+  slot: m.pricing_lifetime_slot(),
+};
 
-const features = [
+const fmFeatures = [
   m.pricing_f1(),
   m.pricing_f2(),
   m.pricing_f3(),
   m.pricing_f4(),
   m.pricing_f5(),
+  m.pricing_fm_f1(),
+  m.pricing_fm_f2(),
+  m.pricing_fm_f3(),
+];
+
+const courses = [
+  {
+    title: m.pricing_course_arduino_title(),
+    price: m.pricing_course_arduino_price(),
+    original: m.pricing_course_arduino_original(),
+    tag: m.pricing_course_arduino_tag(),
+  },
+  {
+    title: m.pricing_course_sensor_title(),
+    price: m.pricing_course_sensor_price(),
+    original: m.pricing_course_sensor_original(),
+    tag: m.pricing_course_sensor_tag(),
+  },
+  {
+    title: m.pricing_course_iot_title(),
+    price: m.pricing_course_iot_price(),
+    original: m.pricing_course_iot_original(),
+    tag: m.pricing_course_iot_tag(),
+  },
 ];
 ---
 
 <section class="py-24 bg-white" id="pricing">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
     <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 border border-[#1D8536]/20 text-[#1D8536] font-medium text-sm mb-6">
-        {m.pricing_trial_badge()}
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E18914]/10 border border-[#E18914]/20 text-[#E18914] font-medium text-sm mb-6">
+        <Star size={16} class="fill-current" /> {m.pricing_lifetime_badge()}
       </div>
       <h2 class="text-3xl lg:text-4xl font-bold text-[#2D2D2D] font-sans mb-4">
         {m.pricing_title()}
@@ -53,61 +59,89 @@ const features = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      {plans.map((plan) => (
-        <div class={`relative bg-white rounded-3xl overflow-hidden transition-transform duration-300 hover:scale-105 ${
-          plan.featured 
-            ? 'border-2 border-[#E18914] shadow-2xl shadow-[#E18914]/20' 
-            : 'border border-gray-200 shadow-xl'
-        }`}>
-          {plan.badge && (
-            <div class="absolute top-0 inset-x-0 bg-[#E18914] text-white text-center py-2 font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-2">
-              <Star size={16} class="fill-current" /> {plan.badge}
-            </div>
-          )}
-          {plan.savings && (
-            <div class="absolute top-0 inset-x-0 bg-[#1D8536] text-white text-center py-2 font-bold text-sm tracking-widest uppercase">
-              {plan.savings}
-            </div>
-          )}
+    <!-- Founding Member Card -->
+    <div class="max-w-3xl mx-auto mb-20">
+      <div class="relative bg-[#1a1a2e] rounded-3xl overflow-hidden border-2 border-[#E18914] shadow-2xl shadow-[#E18914]/20">
+        <!-- Badge -->
+        <div class="absolute top-0 inset-x-0 bg-[#E18914] text-white text-center py-2 font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-2">
+          <Star size={16} class="fill-current" /> {foundingMember.badge}
+        </div>
 
-          <div class={`p-8 text-center border-b border-gray-100 ${plan.badge || plan.savings ? 'pt-12' : ''}`}>
-            <h3 class="text-xl font-bold text-[#2D2D2D] mb-4">
-              {plan.name}
-            </h3>
-            <div class="flex items-baseline justify-center gap-1">
-              <span class="text-2xl font-bold text-[#6B7280]">Rp</span>
-              <span class={`text-5xl font-extrabold font-sans tracking-tighter ${
-                plan.featured ? 'text-[#E18914]' : 'text-[#2D2D2D]'
-              }`}>{plan.price}</span>
-              <span class="text-2xl font-bold text-[#6B7280]">rb</span>
+        <div class="p-8 sm:p-10 pt-14">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">
+                {foundingMember.name}
+              </h3>
+              <p class="text-white/60 text-sm">{foundingMember.slot}</p>
             </div>
-            <p class="mt-3 text-[#6B7280] font-medium">
-              {plan.duration}
-            </p>
-            {plan.slot && (
-              <p class="mt-1 text-sm text-[#E18914] font-medium">
-                {plan.slot}
-              </p>
-            )}
+            <div class="text-left sm:text-right">
+              <div class="flex items-baseline gap-1 justify-start sm:justify-end">
+                <span class="text-lg font-bold text-white/50">Rp</span>
+                <span class="text-4xl font-extrabold text-[#E18914] tracking-tighter">{foundingMember.price}</span>
+                <span class="text-lg font-bold text-white/50">rb</span>
+              </div>
+              <p class="text-white/50 text-sm mt-1">{foundingMember.duration}</p>
+            </div>
           </div>
 
-          <div class="p-8 bg-[#F3F4F6]/50">
-            <ul class="space-y-3 mb-8">
-              {features.map((feature) => (
-                <li class="flex items-start gap-3">
-                  <CheckCircle2 size={20} class="text-[#1D8536] shrink-0 mt-0.5" />
-                  <span class="text-[#2D2D2D] text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
+          <div class="grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-8">
+            {fmFeatures.map((feature) => (
+              <li class="flex items-start gap-3 list-none">
+                <CheckCircle2 size={18} class="text-[#1D8536] shrink-0 mt-0.5" />
+                <span class="text-white/90 text-sm">{feature}</span>
+              </li>
+            ))}
+          </div>
+
+          <a
+            href={`${LMS_URL}/register`}
+            class="w-full flex items-center justify-center py-4 rounded-2xl text-lg font-bold transition-all bg-[#E18914] text-white hover:bg-[#c9780f] shadow-lg hover:shadow-[#E18914]/40"
+          >
+            {m.pricing_cta()}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Per-Course Section -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 border border-[#1D8536]/20 text-[#1D8536] font-medium text-sm mb-6">
+        <BookOpen size={16} /> {m.pricing_per_course_badge()}
+      </div>
+      <h3 class="text-2xl lg:text-3xl font-bold text-[#2D2D2D] font-sans mb-3">
+        {m.pricing_per_course_title()}
+      </h3>
+      <p class="text-[#6B7280] text-lg max-w-2xl mx-auto">
+        {m.pricing_per_course_subtitle()}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      {courses.map((course) => (
+        <div class="relative bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-xl transition-transform duration-300 hover:scale-105">
+          <!-- Course tag -->
+          <div class="absolute top-0 inset-x-0 bg-[#1D8536] text-white text-center py-2 font-bold text-xs tracking-widest uppercase">
+            {course.tag}
+          </div>
+
+          <div class="p-8 pt-14 text-center border-b border-gray-100">
+            <h4 class="text-lg font-bold text-[#2D2D2D] mb-4">
+              {course.title}
+            </h4>
+            <div class="flex items-baseline justify-center gap-2">
+              <span class="text-lg font-bold text-[#6B7280]">Rp</span>
+              <span class="text-4xl font-extrabold text-[#2D2D2D] tracking-tighter">{course.price}</span>
+              <span class="text-lg font-bold text-[#6B7280]">rb</span>
+            </div>
+            <p class="mt-1 text-sm text-[#6B7280] line-through">{course.original}</p>
+            <p class="mt-2 text-sm text-[#1D8536] font-medium">{m.pricing_per_course_lifetime()}</p>
+          </div>
+
+          <div class="p-6 bg-[#F3F4F6]/50">
             <a
               href={`${LMS_URL}/register`}
-              class={`w-full flex items-center justify-center py-4 rounded-2xl text-lg font-bold transition-all ${
-                plan.featured
-                  ? 'bg-[#E18914] text-white hover:bg-[#c9780f] shadow-lg hover:shadow-[#E18914]/40'
-                  : 'bg-[#2D2D2D] text-white hover:bg-gray-800'
-              }`}
+              class="w-full flex items-center justify-center py-3 rounded-2xl text-base font-bold transition-all bg-[#2D2D2D] text-white hover:bg-gray-800"
             >
               {m.pricing_cta()}
             </a>
@@ -116,13 +150,11 @@ const features = [
       ))}
     </div>
 
-    <div class="mt-12 text-center">
-      <a
-        href={`${LMS_URL}/register`}
-        class="text-[#E18914] font-medium hover:underline text-lg"
-      >
-        {m.pricing_cta_trial()} →
-      </a>
+    <!-- Free courses note -->
+    <div class="mt-10 text-center">
+      <p class="text-[#6B7280] text-sm">
+        {m.pricing_free_note()}
+      </p>
     </div>
   </div>
 </section>
