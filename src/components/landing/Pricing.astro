@@ -22,26 +22,7 @@ const fmFeatures = [
   m.pricing_fm_f3(),
 ];
 
-const courses = [
-  {
-    title: m.pricing_course_arduino_title(),
-    price: m.pricing_course_arduino_price(),
-    original: m.pricing_course_arduino_original(),
-    tag: m.pricing_course_arduino_tag(),
-  },
-  {
-    title: m.pricing_course_sensor_title(),
-    price: m.pricing_course_sensor_price(),
-    original: m.pricing_course_sensor_original(),
-    tag: m.pricing_course_sensor_tag(),
-  },
-  {
-    title: m.pricing_course_iot_title(),
-    price: m.pricing_course_iot_price(),
-    original: m.pricing_course_iot_original(),
-    tag: m.pricing_course_iot_tag(),
-  },
-];
+
 ---
 
 <section class="py-24 bg-white" id="pricing">
@@ -105,56 +86,45 @@ const courses = [
     </div>
 
     <!-- Per-Course Section -->
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 border border-[#1D8536]/20 text-[#1D8536] font-medium text-sm mb-6">
-        <BookOpen size={16} /> {m.pricing_per_course_badge()}
-      </div>
-      <h3 class="text-2xl lg:text-3xl font-bold text-[#2D2D2D] font-sans mb-3">
-        {m.pricing_per_course_title()}
-      </h3>
-      <p class="text-[#6B7280] text-lg max-w-2xl mx-auto">
-        {m.pricing_per_course_subtitle()}
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      {courses.map((course) => (
-        <div class="relative bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-xl transition-transform duration-300 hover:scale-105">
-          <!-- Course tag -->
-          <div class="absolute top-0 inset-x-0 bg-[#1D8536] text-white text-center py-2 font-bold text-xs tracking-widest uppercase">
-            {course.tag}
-          </div>
-
-          <div class="p-8 pt-14 text-center border-b border-gray-100">
-            <h4 class="text-lg font-bold text-[#2D2D2D] mb-4">
-              {course.title}
-            </h4>
-            <div class="flex items-baseline justify-center gap-2">
-              <span class="text-lg font-bold text-[#6B7280]">Rp</span>
-              <span class="text-4xl font-extrabold text-[#2D2D2D] tracking-tighter">{course.price}</span>
-              <span class="text-lg font-bold text-[#6B7280]">rb</span>
-            </div>
-            <p class="mt-1 text-sm text-[#6B7280] line-through">{course.original}</p>
-            <p class="mt-2 text-sm text-[#1D8536] font-medium">{m.pricing_per_course_lifetime()}</p>
-          </div>
-
-          <div class="p-6 bg-[#F3F4F6]/50">
-            <a
-              href={`${LMS_URL}/register`}
-              class="w-full flex items-center justify-center py-3 rounded-2xl text-base font-bold transition-all bg-[#2D2D2D] text-white hover:bg-gray-800"
-            >
-              {m.pricing_cta()}
-            </a>
-          </div>
+    <div class="max-w-3xl mx-auto">
+      <div class="relative bg-white rounded-3xl overflow-hidden border-2 border-[#1D8536] shadow-xl">
+        <div class="absolute top-0 inset-x-0 bg-[#1D8536] text-white text-center py-2 font-bold text-xs tracking-widest uppercase flex items-center justify-center gap-2">
+          <BookOpen size={16} /> {m.pricing_per_course_badge()}
         </div>
-      ))}
-    </div>
 
-    <!-- Free courses note -->
-    <div class="mt-10 text-center">
-      <p class="text-[#6B7280] text-sm">
-        {m.pricing_free_note()}
-      </p>
+        <div class="p-8 sm:p-10 pt-14 text-center">
+          <h3 class="text-2xl lg:text-3xl font-bold text-[#2D2D2D] font-sans mb-3">
+            {m.pricing_per_course_title()}
+          </h3>
+          <p class="text-[#6B7280] text-lg max-w-xl mx-auto mb-8">
+            {m.pricing_per_course_subtitle()}
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-8">
+            <div class="flex items-baseline gap-1">
+              <span class="text-base font-bold text-[#6B7280]">{m.pricing_per_course_from()}</span>
+              <span class="text-lg font-bold text-[#6B7280]">Rp</span>
+              <span class="text-4xl font-extrabold text-[#2D2D2D] tracking-tighter">{m.pricing_per_course_start_price()}</span>
+              <span class="text-lg font-bold text-[#6B7280]">rb</span>
+              <span class="text-base font-bold text-[#6B7280]">/{m.pricing_per_course_per_course()}</span>
+            </div>
+
+            <div class="h-10 w-px bg-gray-200 hidden sm:block"></div>
+
+            <div class="flex items-center gap-2">
+              <CheckCircle2 size={20} class="text-[#1D8536] shrink-0" />
+              <span class="text-[#2D2D2D] font-semibold">{m.pricing_per_course_free()}</span>
+            </div>
+          </div>
+
+          <a
+            href={`${LMS_URL}/register`}
+            class="inline-flex items-center justify-center px-10 py-4 rounded-2xl text-lg font-bold transition-all bg-[#2D2D2D] text-white hover:bg-gray-800"
+          >
+            {m.pricing_cta()}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
