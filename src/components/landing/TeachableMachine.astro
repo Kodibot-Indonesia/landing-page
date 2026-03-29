@@ -1,0 +1,225 @@
+---
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="py-24 bg-gradient-to-b from-[#F0F4FF] to-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-[#6366F1]/15 text-[#6366F1] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="1" fill="currentColor"/>
+        </svg>
+        {m.tm_badge()}
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-[#1A1A1A] leading-tight mb-4" style="font-family: 'Sora', 'Nunito', sans-serif; letter-spacing: -0.02em;">
+        {m.tm_title()}
+      </h2>
+      <p class="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
+        {m.tm_subtitle()}
+      </p>
+    </div>
+
+    <!-- Hero Visual + Description -->
+    <div class="max-w-5xl mx-auto mb-12">
+      <div class="bg-white rounded-3xl border border-[#6366F1]/15 shadow-lg overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+
+          <!-- Left: Visual -->
+          <div class="bg-gradient-to-br from-[#6366F1]/5 to-[#6366F1]/10 p-8 sm:p-10 flex flex-col items-center justify-center text-center">
+            <div class="relative">
+              <!-- Camera/Webcam icon -->
+              <div class="w-28 h-28 rounded-3xl bg-white shadow-lg flex items-center justify-center mb-5">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+              <!-- Floating labels -->
+              <div class="absolute -top-2 -right-3 bg-[#1D8536] text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md animate-bounce" style="animation-duration: 2s;">
+                {m.tm_label_cat()}
+              </div>
+              <div class="absolute -bottom-1 -left-4 bg-[#E18914] text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md animate-bounce" style="animation-duration: 2.5s;">
+                {m.tm_label_dog()}
+              </div>
+            </div>
+            <p class="text-[#6366F1] font-bold text-sm mt-2" style="font-family: 'Sora', sans-serif;">
+              {m.tm_visual_label()}
+            </p>
+          </div>
+
+          <!-- Right: How it works -->
+          <div class="p-8 sm:p-10 flex flex-col justify-center">
+            <h3 class="font-black text-[#1A1A1A] text-xl mb-5" style="font-family: 'Sora', sans-serif;">
+              {m.tm_how_title()}
+            </h3>
+
+            <div class="space-y-4">
+              <!-- Step 1 -->
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#6366F1]/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <span class="text-[#6366F1] text-xs font-black">1</span>
+                </div>
+                <div>
+                  <p class="text-[#1A1A1A] text-sm font-bold">{m.tm_step1_title()}</p>
+                  <p class="text-[#6B7280] text-xs leading-relaxed">{m.tm_step1_desc()}</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#6366F1]/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <span class="text-[#6366F1] text-xs font-black">2</span>
+                </div>
+                <div>
+                  <p class="text-[#1A1A1A] text-sm font-bold">{m.tm_step2_title()}</p>
+                  <p class="text-[#6B7280] text-xs leading-relaxed">{m.tm_step2_desc()}</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#6366F1]/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <span class="text-[#6366F1] text-xs font-black">3</span>
+                </div>
+                <div>
+                  <p class="text-[#1A1A1A] text-sm font-bold">{m.tm_step3_title()}</p>
+                  <p class="text-[#6B7280] text-xs leading-relaxed">{m.tm_step3_desc()}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+
+      <!-- Card 1: Image Classification -->
+      <div class="group relative bg-white border border-[#6366F1]/20 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div class="w-14 h-14 rounded-2xl bg-[#6366F1]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug" style="font-family: 'Sora', sans-serif;">
+          {m.tm_f1_title()}
+        </h4>
+        <p class="text-sm text-[#6B7280] leading-relaxed mb-3">
+          {m.tm_f1_desc()}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-semibold bg-[#6366F1]/10 text-[#6366F1] px-2 py-0.5 rounded-full">{m.tm_tag_images()}</span>
+          <span class="text-[10px] font-semibold bg-[#1D8536]/10 text-[#1D8536] px-2 py-0.5 rounded-full">{m.tm_tag_nocode()}</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Sound Recognition -->
+      <div class="group relative bg-white border border-[#6366F1]/20 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div class="w-14 h-14 rounded-2xl bg-[#F9DB2B]/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B89E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug" style="font-family: 'Sora', sans-serif;">
+          {m.tm_f2_title()}
+        </h4>
+        <p class="text-sm text-[#6B7280] leading-relaxed mb-3">
+          {m.tm_f2_desc()}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-semibold bg-[#F9DB2B]/15 text-[#B89E00] px-2 py-0.5 rounded-full">{m.tm_tag_audio()}</span>
+          <span class="text-[10px] font-semibold bg-[#E18914]/10 text-[#E18914] px-2 py-0.5 rounded-full">{m.tm_tag_realtime()}</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Pose Detection -->
+      <div class="group relative bg-white border border-[#6366F1]/20 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div class="w-14 h-14 rounded-2xl bg-[#E18914]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E18914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="3"/>
+            <path d="M12 8v4"/>
+            <path d="M8 10l-2 7"/>
+            <path d="M16 10l2 7"/>
+            <path d="M10 12l-1 8"/>
+            <path d="M14 12l1 8"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug" style="font-family: 'Sora', sans-serif;">
+          {m.tm_f3_title()}
+        </h4>
+        <p class="text-sm text-[#6B7280] leading-relaxed mb-3">
+          {m.tm_f3_desc()}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-semibold bg-[#E18914]/10 text-[#E18914] px-2 py-0.5 rounded-full">{m.tm_tag_pose()}</span>
+          <span class="text-[10px] font-semibold bg-[#6366F1]/10 text-[#6366F1] px-2 py-0.5 rounded-full">{m.tm_tag_fun()}</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Export & Share -->
+      <div class="group relative bg-white border border-[#6366F1]/20 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        <div class="w-14 h-14 rounded-2xl bg-[#1D8536]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D8536" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug" style="font-family: 'Sora', sans-serif;">
+          {m.tm_f4_title()}
+        </h4>
+        <p class="text-sm text-[#6B7280] leading-relaxed mb-3">
+          {m.tm_f4_desc()}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-semibold bg-[#1D8536]/10 text-[#1D8536] px-2 py-0.5 rounded-full">{m.tm_tag_export()}</span>
+          <span class="text-[10px] font-semibold bg-[#F9DB2B]/15 text-[#B89E00] px-2 py-0.5 rounded-full">{m.tm_tag_share()}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Highlight -->
+    <div class="mt-12 max-w-3xl mx-auto">
+      <div class="bg-[#1A1A1A] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+        <div class="shrink-0 flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-[#6366F1] flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            </svg>
+          </div>
+          <div class="sm:hidden">
+            <div class="text-white font-bold text-sm" style="font-family: 'Sora', sans-serif;">{m.tm_cta_title()}</div>
+          </div>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <div class="text-white font-bold text-sm mb-1 hidden sm:block" style="font-family: 'Sora', sans-serif;">{m.tm_cta_title()}</div>
+          <p class="text-white/70 text-sm leading-relaxed">
+            {m.tm_cta_desc()}
+          </p>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-[#1D8536] text-white text-xs font-bold px-5 py-2.5 rounded-full shrink-0">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M7 0l1.5 4.5H14l-3.75 2.75L11.75 12 7 8.75 2.25 12l1.5-4.75L0 4.5h4.5z"/></svg>
+          {m.tm_cta_free()}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&display=swap');
+</style>
