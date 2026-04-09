@@ -51,15 +51,29 @@ const aspectRatio = scratchImg.width / scratchImg.height;
             <PlayCircle size={20} class="text-[#1D8536]" /> {m.hero_cta_demo()}
           </a>
         </div>
-        <div class="flex items-center gap-4 text-sm text-[#6B7280] font-medium animate-fade-in-up [animation-delay:300ms]">
-          <div class="flex items-center gap-1">
-            <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_free_trial()}
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm text-[#6B7280] font-medium animate-fade-in-up [animation-delay:300ms]">
+          <div class="flex items-center gap-2">
+            <div class="flex -space-x-2">
+              <div class="w-6 h-6 rounded-full bg-[#1D8536] border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">S</div>
+              <div class="w-6 h-6 rounded-full bg-[#E18914] border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">B</div>
+              <div class="w-6 h-6 rounded-full bg-[#F9DB2B] border-2 border-white flex items-center justify-center text-[10px] text-[#2D2D2D] font-bold">D</div>
+            </div>
+            <span class="whitespace-nowrap">500+ students</span>
           </div>
-          <div class="flex items-center gap-1">
-            <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_lifetime()}
+          <div class="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div class="flex items-center gap-2">
+            <CheckCircle2 size={16} class="text-[#1D8536]" />
+            <span>{m.hero_free_trial()}</span>
           </div>
-          <div class="flex items-center gap-1">
-            <CheckCircle2 size={16} class="text-[#1D8536]" /> {m.hero_no_hardware()}
+          <div class="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div class="flex items-center gap-2">
+            <CheckCircle2 size={16} class="text-[#1D8536]" />
+            <span>{m.hero_lifetime()}</span>
+          </div>
+          <div class="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div class="flex items-center gap-2">
+            <CheckCircle2 size={16} class="text-[#1D8536]" />
+            <span>{m.hero_no_hardware()}</span>
           </div>
         </div>
       </div>

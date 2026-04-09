@@ -1,0 +1,38 @@
+---
+import { Gift, Clock, Zap } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
+
+const features = [
+  { icon: Gift, text: m.lead_magnet_feature_1() },
+  { icon: Clock, text: m.lead_magnet_feature_2() },
+  { icon: Zap, text: m.lead_magnet_feature_3() },
+];
+---
+
+<section class="py-16 bg-gradient-to-r from-[#1D8536] to-[#2D9B4E]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">
+      {m.lead_magnet_title()}
+    </h2>
+    <p class="text-white/80 mb-8 max-w-2xl mx-auto">
+      {m.lead_magnet_subtitle()}
+    </p>
+    
+    <div class="flex flex-wrap justify-center gap-6 mb-8">
+      {features.map((feature) => (
+        <div class="flex items-center gap-2 text-white/90 text-sm">
+          <feature.icon size={18} class="text-[#F9DB2B]" />
+          <span>{feature.text}</span>
+        </div>
+      ))}
+    </div>
+
+    <a
+      href={`${LMS_URL}/register`}
+      class="inline-flex items-center justify-center gap-2 bg-white text-[#1D8536] px-10 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:-translate-y-1"
+    >
+      {m.lead_magnet_cta()}
+    </a>
+  </div>
+</section>

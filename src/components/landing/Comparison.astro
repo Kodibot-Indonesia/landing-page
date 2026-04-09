@@ -1,12 +1,21 @@
 ---
 import { CheckCircle2, XCircle } from "@lucide/astro";
 import { m } from "../../paraglide/messages.js";
+
+const rows = [
+  { feature: m.comparison_r1(), youtube: false, offline: true, kodibot: true },
+  { feature: m.comparison_r2(), youtube: true, offline: false, kodibot: true },
+  { feature: m.comparison_r3(), youtube: false, offline: false, kodibot: true },
+  { feature: m.comparison_r4(), youtube: true, offline: false, kodibot: true },
+  { feature: m.comparison_r5(), youtube: " Gratis", offline: " Rp 500k-2jt/bln", kodibot: " Lifetime" },
+];
 ---
 
-<section class="py-24 bg-[#F3F4F6]">
+<section class="py-20 lg:py-28 bg-[#F3F4F6]">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold text-[#2D2D2D] font-sans mb-4">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-2xl lg:text-3xl font-bold text-[#2D2D2D] font-sans mb-4">
         {m.comparison_title()}
       </h2>
       <p class="text-[#6B7280]">
@@ -14,315 +23,68 @@ import { m } from "../../paraglide/messages.js";
       </p>
     </div>
 
-    {/* Tabs Navigation */}
-    <div
-      class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10"
-    >
-      <button
-        id="btn-tab-platform"
-        class="px-8 py-3 rounded-full font-bold text-sm sm:text-base transition-all duration-300 bg-[#E18914] text-white shadow-md w-full sm:w-auto"
-      >
-        {m.comparison_tab_platform()}
-      </button>
-      <button
-        id="btn-tab-hardware"
-        class="px-8 py-3 rounded-full font-bold text-sm sm:text-base transition-all duration-300 bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-gray-900 w-full sm:w-auto"
-      >
-        {m.comparison_tab_hardware()}
-      </button>
-    </div>
-
-    {/* Tab Content 1: Platform Comparison */}
-    <div id="tab-content-platform" class="block animate-fade-in">
-      <div
-        class="overflow-x-auto rounded-3xl shadow-xl border border-gray-200 bg-white"
-      >
-        <table class="w-full text-left border-collapse">
-          <thead>
+    <!-- Comparison Table -->
+    <div class="overflow-x-auto rounded-3xl shadow-xl border border-gray-200 bg-white">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="p-6 bg-gray-50 border-b border-r border-gray-200 text-[#2D2D2D] font-bold w-1/4">
+              {m.comparison_col1()}
+            </th>
+            <th class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50">
+              {m.comparison_col2()}
+            </th>
+            <th class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50">
+              {m.comparison_col3()}
+            </th>
+            <th class="p-6 border-b border-[#E18914] bg-[#E18914]/10 text-[#E18914] font-bold text-center w-1/4 text-lg">
+              {m.comparison_col4()}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-sm md:text-base">
+          {rows.map((row, i) => (
             <tr>
-              <th
-                class="p-6 bg-gray-50 border-b border-r border-gray-200 text-[#2D2D2D] font-bold w-1/4"
-              >
-                {m.comparison_col1()}
-              </th>
-              <th
-                class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50"
-              >
-                {m.comparison_col2()}
-              </th>
-              <th
-                class="p-6 border-b border-r border-gray-200 text-gray-500 font-bold text-center w-1/4 bg-gray-50"
-              >
-                {m.comparison_col3()}
-              </th>
-              <th
-                class="p-6 border-b border-[#E18914] bg-[#E18914]/10 text-[#E18914] font-bold text-center w-1/4 text-lg"
-              >
-                {m.comparison_col4()}
-              </th>
+              <td class="p-6 border-b border-r border-gray-200 font-medium">
+                {row.feature}
+              </td>
+              <td class="p-6 border-b border-r border-gray-200 text-center">
+                {typeof row.youtube === "boolean" ? (
+                  row.youtube ? (
+                    <CheckCircle2 size={20} class="mx-auto inline text-green-500" />
+                  ) : (
+                    <XCircle size={20} class="mx-auto inline text-red-500" />
+                  )
+                ) : (
+                  <span class="text-gray-500 text-xs">{row.youtube}</span>
+                )}
+              </td>
+              <td class="p-6 border-b border-r border-gray-200 text-center">
+                {typeof row.offline === "boolean" ? (
+                  row.offline ? (
+                    <CheckCircle2 size={20} class="mx-auto inline text-green-500" />
+                  ) : (
+                    <XCircle size={20} class="mx-auto inline text-red-500" />
+                  )
+                ) : (
+                  <span class="text-gray-500 text-xs">{row.offline}</span>
+                )}
+              </td>
+              <td class={`p-6 border-b bg-[#E18914]/5 text-center ${i === rows.length - 1 ? "rounded-br-3xl" : ""}`}>
+                {typeof row.kodibot === "boolean" ? (
+                  row.kodibot ? (
+                    <CheckCircle2 size={24} class="mx-auto inline text-[#1D8536]" />
+                  ) : (
+                    <XCircle size={24} class="mx-auto inline text-gray-400" />
+                  )
+                ) : (
+                  <span class="text-[#E18914] font-extrabold">{row.kodibot}</span>
+                )}
+              </td>
             </tr>
-          </thead>
-          <tbody class="text-sm md:text-base">
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.comparison_r1()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500"
-                ><XCircle size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-green-500"
-                ><CheckCircle2 size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline" /> CSTA Aligned</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.comparison_r2()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500"
-                ><XCircle size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500"
-                ><XCircle size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline" /> {m.comparison_c4_simulator()}</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.comparison_r3()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500"
-                ><XCircle size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-gray-500"
-                >{m.comparison_c3_manual()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline" /> AI Validation</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.comparison_r4()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-green-500"
-                ><CheckCircle2 size={20} class="mx-auto inline" /></td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500"
-                ><XCircle size={20} class="mx-auto inline" />
-                {m.comparison_c3_schedule()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#E18914]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline" /> {m.comparison_c4_available()}</td
-              >
-            </tr>
-            <tr>
-              <td
-                class="p-6 border-r border-gray-200 font-medium rounded-bl-3xl"
-                >{m.comparison_r5()}</td
-              >
-              <td class="p-6 border-r border-gray-200 text-center text-gray-500"
-                >{m.comparison_c2_free()}</td
-              >
-              <td class="p-6 border-r border-gray-200 text-center text-gray-500"
-                >{m.comparison_c3_cost()}</td
-              >
-              <td
-                class="p-6 bg-[#E18914]/5 text-center text-[#E18914] font-extrabold rounded-br-3xl"
-                >{m.comparison_c4_lifetime()}</td
-              >
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {/* Tab Content 2: Hardware vs Simulator */}
-    <div id="tab-content-hardware" class="hidden animate-fade-in">
-      <div class="text-center mb-10">
-        <h2 class="text-2xl font-bold text-[#2D2D2D] font-sans mb-3">
-          {m.hw_comparison_title()}
-        </h2>
-        <p class="text-[#6B7280]">
-          {m.hw_comparison_subtitle()}
-        </p>
-      </div>
-
-      <div
-        class="overflow-x-auto rounded-3xl shadow-xl border border-gray-200 bg-white"
-      >
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr>
-              <th
-                class="p-6 bg-gray-50 border-b border-r border-gray-200 text-[#2D2D2D] font-bold w-1/3"
-              >
-                {m.hw_comparison_col1()}
-              </th>
-              <th
-                class="p-6 border-b border-r border-gray-200 text-[#2D2D2D] font-bold text-center w-1/3 bg-gray-50"
-              >
-                {m.hw_comparison_col2()}
-              </th>
-              <th
-                class="p-6 border-b border-[#1D8536] bg-[#1D8536]/10 text-[#1D8536] font-bold text-center w-1/3 text-lg"
-              >
-                {m.hw_comparison_col3()}
-              </th>
-            </tr>
-          </thead>
-          <tbody class="text-sm md:text-base">
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.hw_comparison_r1()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500 font-semibold"
-                >{m.hw_comparison_c2_1()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#1D8536]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline mb-1" />
-                <br class="hidden md:block" />{m.hw_comparison_c3_1()}</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.hw_comparison_r2()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500 font-semibold"
-                >{m.hw_comparison_c2_2()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#1D8536]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline mb-1" />
-                <br class="hidden md:block" />{m.hw_comparison_c3_2()}</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.hw_comparison_r3()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500 font-semibold"
-                >{m.hw_comparison_c2_3()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#1D8536]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline mb-1" />
-                <br class="hidden md:block" />{m.hw_comparison_c3_3()}</td
-              >
-            </tr>
-            <tr>
-              <td class="p-6 border-b border-r border-gray-200 font-medium"
-                >{m.hw_comparison_r4()}</td
-              >
-              <td
-                class="p-6 border-b border-r border-gray-200 text-center text-red-500 font-semibold"
-                >{m.hw_comparison_c2_4()}</td
-              >
-              <td
-                class="p-6 border-b bg-[#1D8536]/5 text-center text-[#1D8536] font-bold"
-                ><CheckCircle2 size={24} class="mx-auto inline mb-1" />
-                <br class="hidden md:block" />{m.hw_comparison_c3_4()}</td
-              >
-            </tr>
-            <tr>
-              <td
-                class="p-6 border-r border-gray-200 font-medium rounded-bl-3xl bg-gray-50"
-                >{m.hw_comparison_r5()}</td
-              >
-              <td
-                class="p-6 border-r border-gray-200 text-center text-red-600 font-bold bg-red-50"
-                >{m.hw_comparison_c2_5()}</td
-              >
-              <td
-                class="p-6 bg-[#1D8536]/10 text-center text-[#1D8536] font-extrabold rounded-br-3xl text-lg"
-                >{m.hw_comparison_c3_5()}</td
-              >
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <script>
-    function setupTabs() {
-      const btnPlatform = document.getElementById("btn-tab-platform");
-      const btnHardware = document.getElementById("btn-tab-hardware");
-      const contentPlatform = document.getElementById("tab-content-platform");
-      const contentHardware = document.getElementById("tab-content-hardware");
-
-      if (!btnPlatform || !btnHardware || !contentPlatform || !contentHardware)
-        return;
-
-      // Active state Tailwind classes
-      const activeClasses = ["bg-[#E18914]", "text-white", "shadow-md"];
-      const inactiveClasses = [
-        "bg-white",
-        "text-gray-600",
-        "border",
-        "border-gray-200",
-        "hover:bg-gray-50",
-        "hover:text-gray-900",
-      ];
-
-      function switchTab(isPlatform) {
-        if (isPlatform) {
-          // Highlight Platform tab
-          btnPlatform.classList.remove(...inactiveClasses);
-          btnPlatform.classList.add(...activeClasses);
-          // Dim Hardware tab
-          btnHardware.classList.remove(...activeClasses);
-          btnHardware.classList.add(...inactiveClasses);
-
-          // Show Platform content, hide Hardware
-          contentPlatform.classList.remove("hidden");
-          contentPlatform.classList.add("block");
-          contentHardware.classList.add("hidden");
-          contentHardware.classList.remove("block");
-        } else {
-          // Highlight Hardware tab
-          btnHardware.classList.remove(...inactiveClasses);
-          btnHardware.classList.add(...activeClasses);
-          // Dim Platform tab
-          btnPlatform.classList.remove(...activeClasses);
-          btnPlatform.classList.add(...inactiveClasses);
-
-          // Show Hardware content, hide Platform
-          contentHardware.classList.remove("hidden");
-          contentHardware.classList.add("block");
-          contentPlatform.classList.add("hidden");
-          contentPlatform.classList.remove("block");
-        }
-      }
-
-      btnPlatform.addEventListener("click", () => switchTab(true));
-      btnHardware.addEventListener("click", () => switchTab(false));
-    }
-
-    // Initialize tabs when the document starts
-    setupTabs();
-
-    // Re-initialize tabs if Astro ViewTransitions are used
-    document.addEventListener("astro:page-load", setupTabs);
-  </script>
 </section>

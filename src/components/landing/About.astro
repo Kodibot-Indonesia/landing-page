@@ -1,0 +1,63 @@
+---
+import { GraduationCap, Shield, Users, Lightbulb } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+
+const features = [
+  { icon: GraduationCap, title: m.about_feature_1_title(), desc: m.about_feature_1_desc() },
+  { icon: Shield, title: m.about_feature_2_title(), desc: m.about_feature_2_desc() },
+  { icon: Users, title: m.about_feature_3_title(), desc: m.about_feature_3_desc() },
+  { icon: Lightbulb, title: m.about_feature_4_title(), desc: m.about_feature_4_desc() },
+];
+---
+
+<section class="py-20 lg:py-28 bg-[#F3F4F6]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#2D2D2D] leading-tight mb-3">
+        {m.about_title()}
+      </h2>
+      <p class="text-[#6B7280] text-base sm:text-lg max-w-2xl mx-auto">
+        {m.about_subtitle()}
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {features.map((feature) => (
+        <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-[#E18914]/10 flex items-center justify-center">
+            <feature.icon size={28} class="text-[#E18914]" />
+          </div>
+          <h3 class="text-sm font-bold text-[#2D2D2D] mb-2">{feature.title}</h3>
+          <p class="text-xs text-[#6B7280] leading-relaxed">{feature.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Stats Row -->
+    <div class="mt-12 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+      <div class="text-center">
+        <div class="text-2xl lg:text-3xl font-bold text-[#E18914]">{m.about_stat_1()}</div>
+        <div class="text-xs text-[#6B7280]">{m.about_stat_1_label()}</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl lg:text-3xl font-bold text-[#E18914]">{m.about_stat_2()}</div>
+        <div class="text-xs text-[#6B7280]">{m.about_stat_2_label()}</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl lg:text-3xl font-bold text-[#E18914]">{m.about_stat_3()}</div>
+        <div class="text-xs text-[#6B7280]">{m.about_stat_3_label()}</div>
+      </div>
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="mt-12 text-center max-w-3xl mx-auto p-8 bg-white rounded-3xl">
+      <p class="text-[#2D2D2D] text-lg leading-relaxed">
+        {m.about_mission()}
+      </p>
+    </div>
+
+  </div>
+</section>

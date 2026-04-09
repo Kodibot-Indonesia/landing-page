@@ -1,10 +1,24 @@
 ---
-import { PlayCircle, FileCheck, MonitorSmartphone, Cpu } from '@lucide/astro';
+import { PlayCircle, FileCheck, MonitorSmartphone, Cpu, CheckCircle2, Gamepad2, Trophy } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
+
+const steps = [
+  { icon: FileCheck, title: m.how_it_works_step1_title(), desc: m.how_it_works_step1_desc() },
+  { icon: MonitorSmartphone, title: m.how_it_works_step2_title(), desc: m.how_it_works_step2_desc() },
+  { icon: Cpu, title: m.how_it_works_step3_title(), desc: m.how_it_works_step3_desc() },
+];
+
+const outcomes = [
+  m.solution_outcome_1(),
+  m.solution_outcome_2(),
+  m.solution_outcome_3(),
+];
 ---
 
 <section class="py-24 bg-white" id="demo">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1D8536]/10 text-[#1D8536] font-bold text-sm mb-4">
         ✨ {m.solution_badge()}
@@ -17,46 +31,48 @@ import { m } from '../../paraglide/messages.js';
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="rounded-3xl overflow-hidden shadow-2xl bg-[#2D2D2D] p-2 aspect-video relative flex items-center justify-center group">
-        <div
-          class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"
-          aria-hidden
-        />
-        <div class="w-16 h-16 bg-[#E18914] text-white rounded-full flex items-center justify-center z-10 cursor-pointer shadow-[0_0_30px_rgba(225,137,20,0.6)] group-hover:scale-110 transition-transform">
-          <PlayCircle size={32} class="ml-1" />
+    <!-- How It Works: 3 Steps -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      {steps.map((step, i) => (
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-20 h-20 bg-white border-4 border-[#F3F4F6] shadow-xl rounded-full flex items-center justify-center mb-6 z-10">
+            <step.icon size={36} class={i === 1 ? "text-white" : "text-[#E18914]"} style={i === 1 ? "filter: drop-shadow(0 0 8px rgba(225,137,20,0.5));" : ""} />
+          </div>
+          <h3 class="text-xl font-bold text-[#2D2D2D] mb-3">{step.title}</h3>
+          <p class="text-[#6B7280] text-sm">{step.desc}</p>
         </div>
-      </div>
+      ))}
+    </div>
 
-      <div class="space-y-8">
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-[#F9DB2B]/20 rounded-xl flex items-center justify-center mt-1">
-            <FileCheck size={24} class="text-[#E18914]" />
+    <!-- Outcome Benefits -->
+    <div class="bg-[#F3F4F6] rounded-3xl p-8 lg:p-10">
+      <h3 class="text-xl font-bold text-[#2D2D2D] font-sans mb-6 text-center">
+        {m.solution_outcome_title()}
+      </h3>
+      <div class="grid sm:grid-cols-3 gap-6">
+        {outcomes.map((outcome) => (
+          <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+            <CheckCircle2 size={24} class="text-[#1D8536] shrink-0" />
+            <span class="text-[#2D2D2D] font-medium text-sm">{outcome}</span>
           </div>
-          <div>
-            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step1_title()}</h3>
-            <p class="text-[#6B7280]">{m.solution_step1_desc()}</p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-[#1D8536]/10 rounded-xl flex items-center justify-center mt-1">
-            <MonitorSmartphone size={24} class="text-[#1D8536]" />
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step2_title()}</h3>
-            <p class="text-[#6B7280]">{m.solution_step2_desc()}</p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mt-1">
-            <Cpu size={24} class="text-blue-600" />
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-[#2D2D2D] mb-2">{m.solution_step3_title()}</h3>
-            <p class="text-[#6B7280]">{m.solution_step3_desc()}</p>
-          </div>
-        </div>
+        ))}
       </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+      <a
+        href={`${LMS_URL}/register`}
+        class="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:shadow-[#E18914]/30 hover:-translate-y-1"
+      >
+        {m.hero_cta_register()}
+      </a>
+      <a
+        href="#pricing"
+        class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-[#F3F4F6] text-[#2D2D2D] border border-gray-200 px-8 py-4 rounded-full text-lg font-bold transition-all hover:-translate-y-1"
+      >
+        {m.pricing_title()}
+      </a>
     </div>
   </div>
 </section>

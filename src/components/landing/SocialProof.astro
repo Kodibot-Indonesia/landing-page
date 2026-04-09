@@ -1,0 +1,96 @@
+---
+import { Star, Users, Award, Shield } from '@lucide/astro';
+import { m } from '../../paraglide/messages.js';
+
+const stats = [
+  { icon: Users, value: '500+', label: m.social_proof_students() },
+  { icon: Star, value: '4.8/5', label: m.social_proof_rating() },
+  { icon: Award, value: 'CSTA', label: m.social_proof_curriculum() },
+];
+
+const testimonials = [
+  {
+    quote: m.social_proof_testimonial_1_quote(),
+    name: m.social_proof_testimonial_1_author(),
+    location: m.social_proof_testimonial_1_location(),
+    rating: parseInt(m.social_proof_testimonial_1_rating()),
+  },
+  {
+    quote: m.social_proof_testimonial_2_quote(),
+    name: m.social_proof_testimonial_2_author(),
+    location: m.social_proof_testimonial_2_location(),
+    rating: parseInt(m.social_proof_testimonial_2_rating()),
+  },
+  {
+    quote: m.social_proof_testimonial_3_quote(),
+    name: m.social_proof_testimonial_3_author(),
+    location: m.social_proof_testimonial_3_location(),
+    rating: parseInt(m.social_proof_testimonial_3_rating()),
+  },
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <h2 class="text-2xl lg:text-3xl font-bold text-[#2D2D2D] font-sans mb-2">
+        {m.social_proof_title()}
+      </h2>
+      <p class="text-[#6B7280] text-sm">
+        {m.social_proof_subtitle()}
+      </p>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid grid-cols-3 gap-4 mb-10">
+      {stats.map((stat) => (
+        <div class="flex flex-col items-center text-center p-4 rounded-xl bg-[#F3F4F6]">
+          <stat.icon size={24} class="text-[#E18914] mb-2" />
+          <div class="text-xl lg:text-2xl font-bold text-[#2D2D2D]">{stat.value}</div>
+          <div class="text-xs text-[#6B7280]">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Testimonial Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      {testimonials.map((t) => (
+        <div class="bg-[#F3F4F6] rounded-2xl p-6 lg:p-6 border border-gray-100 hover:shadow-lg transition-shadow">
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: t.rating }).map(() => (
+              <Star size={16} class="text-[#F9DB2B] fill-current" />
+            ))}
+          </div>
+          <p class="text-[#2D2D2D] text-sm leading-relaxed mb-4 italic line-clamp-4">
+            "{t.quote}"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#E18914] flex items-center justify-center text-white font-bold text-lg">
+              {t.name.charAt(0)}
+            </div>
+            <div>
+              <div class="font-bold text-[#2D2D2D] text-sm">{t.name}</div>
+              <div class="text-xs text-[#6B7280]">{t.location}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="flex flex-wrap justify-center gap-4 mt-8 pt-8 border-t border-gray-100">
+      <div class="flex items-center gap-2 text-xs text-[#6B7280]">
+        <Shield size={14} class="text-[#1D8536]" />
+        <span>{m.social_proof_guarantee()}</span>
+      </div>
+      <div class="flex items-center gap-2 text-xs text-[#6B7280]">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D8536" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>{m.social_proof_secure()}</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,260 +1,211 @@
 ---
+import { Zap, Code, Brain, ArrowRight, BookOpen } from '@lucide/astro';
 import { m } from '../../paraglide/messages.js';
+import { LMS_URL } from '../../lib/config.js';
+
+const codingPath = [
+  { 
+    num: '1', 
+    title: m.learning_path_1_title(), 
+    desc: m.learning_path_1_desc(), 
+    deliverable: m.learning_path_1_deliverable(),
+  },
+  { 
+    num: '2', 
+    title: m.learning_path_2_title(), 
+    desc: m.learning_path_2_desc(), 
+    deliverable: m.learning_path_2_deliverable(),
+  },
+  { 
+    num: '3', 
+    title: m.learning_path_3_title(), 
+    desc: m.learning_path_3_desc(), 
+    deliverable: m.learning_path_3_deliverable(),
+  },
+];
+
+const electronicsPath = [
+  { 
+    num: '1', 
+    title: m.learning_path_electronics_title(), 
+    desc: m.learning_path_electronics_desc(), 
+    deliverable: "5 circuit experiments",
+    badge: m.learning_path_electronics_free(),
+    badgeColor: "#1D8536"
+  },
+  { 
+    num: '2', 
+    title: m.learning_path_3_title(), 
+    desc: m.learning_path_3_desc(), 
+    deliverable: m.learning_path_3_deliverable(),
+  },
+];
+
+const aiPath = [
+  { 
+    num: '1', 
+    title: m.tm_title(), 
+    desc: m.tm_subtitle(), 
+    deliverable: "Image, Sound & Pose recognition",
+    badge: m.learning_path_electronics_free(),
+    badgeColor: "#8B5CF6"
+  },
+];
 ---
 
-<section class="py-28 bg-white overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-20 lg:py-28 bg-white overflow-hidden" id="curriculum">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-12">
       <div class="inline-flex items-center gap-2 bg-[#F9DB2B]/15 text-[#B89E00] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.5 4.5H12L8.25 7.25 9.75 12 6 9.25 2.25 12l1.5-4.75L0 4.5h4.5z"/></svg>
         {m.learning_path_badge()}
       </div>
-      <h2 class="text-4xl sm:text-5xl font-black text-[#1A1A1A] leading-tight mb-5" style="font-family: 'Sora', 'Nunito', sans-serif; letter-spacing: -0.02em;">
-        {m.learning_path_title_v2()}
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#2D2D2D] leading-tight mb-3">
+        {m.learning_path_title()}
       </h2>
-      <p class="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
-        {m.learning_path_subtitle_v2()}
+      <p class="text-[#6B7280] text-base sm:text-lg max-w-2xl mx-auto">
+        {m.learning_path_subtitle()}
       </p>
     </div>
 
-    <!-- ===== FOUNDATION ROW ===== -->
-    <div class="mb-2">
-      <!-- Foundation Label -->
-      <div class="flex justify-center mb-5">
-        <div class="inline-flex items-center gap-2 bg-[#1D8536]/10 text-[#1D8536] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="6" width="12" height="7" rx="1"/>
-            <path d="M7 1L1 6h12L7 1z"/>
-          </svg>
-          {m.learning_path_foundation_label()}
-        </div>
-      </div>
-
-      <!-- Foundation Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-        <!-- Scratch Card -->
-        <div class="group relative bg-[#F0FAF2] border border-[#1D8536]/20 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="flex items-center gap-4 mb-3">
-            <div class="w-12 h-12 rounded-xl bg-[#1D8536] flex items-center justify-center shadow-lg shadow-[#1D8536]/30 group-hover:scale-110 transition-transform duration-300 shrink-0">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 18 22 12 16 6"/>
-                <polyline points="8 6 2 12 8 18"/>
-              </svg>
-            </div>
-            <h4 class="font-bold text-[#1A1A1A] text-base leading-snug" style="font-family: 'Sora', sans-serif;">
-              {m.learning_path_1_title()}
-            </h4>
-          </div>
-          <p class="text-sm text-[#6B7280] leading-relaxed">
-            {m.learning_path_1_desc()}
-          </p>
-        </div>
-
-        <!-- Electronics Card -->
-        <div class="group relative bg-[#FFF8F0] border border-[#E18914]/30 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <!-- NEW Badge -->
-          <div class="absolute -top-2.5 -right-2.5 bg-[#E18914] text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg shadow-[#E18914]/40 z-10">
-            {m.learning_path_electronics_new()}
-          </div>
-          <!-- FREE Badge -->
-          <div class="absolute -top-2.5 right-14 bg-[#1D8536] text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg shadow-[#1D8536]/40 z-10">
-            {m.learning_path_electronics_free()}
-          </div>
-          <div class="flex items-center gap-4 mb-3">
-            <div class="w-12 h-12 rounded-xl bg-[#E18914] flex items-center justify-center shadow-lg shadow-[#E18914]/30 group-hover:scale-110 transition-transform duration-300 shrink-0">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v6l3-3"/>
-                <path d="M12 2v6l-3-3"/>
-                <circle cx="12" cy="14" r="4"/>
-                <path d="M8 14H2M22 14h-6"/>
-              </svg>
-            </div>
-            <h4 class="font-bold text-[#1A1A1A] text-base leading-snug" style="font-family: 'Sora', sans-serif;">
-              {m.learning_path_electronics_title()}
-            </h4>
-          </div>
-          <p class="text-sm text-[#6B7280] leading-relaxed">
-            {m.learning_path_electronics_desc()}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== SVG FORK DIAGRAM ===== -->
-    <div class="relative flex justify-center my-2" style="height: 80px;">
-      <!-- Desktop SVG fork -->
-      <svg class="hidden md:block w-full max-w-3xl" viewBox="0 0 700 80" fill="none" preserveAspectRatio="xMidYMid meet" style="height: 80px;">
-        <!-- Center vertical line down from foundation -->
-        <line x1="350" y1="0" x2="350" y2="20" stroke="#1D8536" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Dot at fork point -->
-        <circle cx="350" cy="20" r="5" fill="#1D8536"/>
-        <!-- Left branch curve to Coding -->
-        <path d="M350 20 C350 35, 175 35, 175 55 L175 80" stroke="#F9DB2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <!-- Right branch curve to Electronics -->
-        <path d="M350 20 C350 35, 525 35, 525 55 L525 80" stroke="#E18914" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <!-- Left endpoint dot -->
-        <circle cx="175" cy="80" r="5" fill="#F9DB2B"/>
-        <!-- Right endpoint dot -->
-        <circle cx="525" cy="80" r="5" fill="#E18914"/>
-        <!-- Coding label -->
-        <text x="175" y="52" text-anchor="middle" fill="#B89E00" font-size="10" font-weight="700" letter-spacing="0.1em" font-family="Sora, sans-serif">CODING</text>
-        <!-- Electronics label -->
-        <text x="525" y="52" text-anchor="middle" fill="#E18914" font-size="10" font-weight="700" letter-spacing="0.1em" font-family="Sora, sans-serif">ELECTRONICS</text>
-      </svg>
-
-      <!-- Mobile: simple vertical connector -->
-      <div class="md:hidden flex flex-col items-center gap-1 py-2">
-        <div class="w-0.5 h-4 bg-[#1D8536]"></div>
-        <div class="w-3 h-3 rounded-full bg-[#1D8536]"></div>
-        <svg width="80" height="40" viewBox="0 0 80 40" fill="none">
-          <path d="M40 0 C40 10, 20 20, 20 30" stroke="#F9DB2B" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M40 0 C40 10, 60 20, 60 30" stroke="#E18914" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- ===== TRACK CARDS (Side by Side) ===== -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-
-      <!-- ====== CODING TRACK (Left / Yellow) ====== -->
-      <div class="group bg-white border-2 border-[#F9DB2B]/30 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <!-- Track Header -->
-        <div class="bg-gradient-to-r from-[#F9DB2B] to-[#FFEB6B] px-6 py-4 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/30 flex items-center justify-center backdrop-blur-sm">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"/>
-              <polyline points="8 6 2 12 8 18"/>
-            </svg>
+    <!-- Three Paths -->
+    <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
+      
+      <!-- Coding Path -->
+      <div class="bg-gradient-to-br from-[#F3F4F6] to-white rounded-3xl p-5 lg:p-6 border border-gray-100">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-full bg-[#E18914]/10 flex items-center justify-center">
+            <Code size={18} class="text-[#E18914]" />
           </div>
           <div>
-            <div class="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-[0.15em]">Track</div>
-            <h3 class="font-bold text-[#1A1A1A] text-lg leading-tight" style="font-family: 'Sora', sans-serif;">
-              {m.learning_path_coding_label()}
-            </h3>
+            <h3 class="text-base font-bold text-[#2D2D2D]">{m.learning_path_coding_path()}</h3>
+            <p class="text-[10px] text-[#6B7280]">Visual programming</p>
           </div>
         </div>
-
-        <!-- Steps -->
-        <div class="p-6 space-y-4">
-          <!-- Step 2: MakeCode IoT -->
-          <div class="flex items-start gap-4 group/step">
-            <div class="relative shrink-0">
-              <div class="w-11 h-11 rounded-xl bg-[#F9DB2B]/15 flex items-center justify-center border border-[#F9DB2B]/30 group-hover/step:scale-110 transition-transform duration-300">
-                <span class="text-lg font-black text-[#B89E00]" style="font-family: 'Sora', sans-serif;">1</span>
+        
+        <div class="space-y-3">
+          {codingPath.map((step, index) => (
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${index === 0 ? 'bg-[#1D8536]' : index === 1 ? 'bg-[#F9DB2B] text-[#2D2D2D]' : 'bg-[#E18914]'}`}>
+                  {step.num}
+                </div>
+                {index < codingPath.length - 1 && (
+                  <div class="w-0.5 h-6 bg-gray-200 mt-1"></div>
+                )}
+              </div>
+              <div class="flex-1 pb-3">
+                <h4 class="text-sm font-bold text-[#2D2D2D] mb-1">{step.title}</h4>
+                <p class="text-xs text-[#6B7280] mb-2 line-clamp-2">{step.desc}</p>
+                <span class="text-[10px] bg-[#E18914]/10 px-2 py-0.5 rounded-full text-[#E18914]">{step.deliverable}</span>
               </div>
             </div>
-            <div class="flex-1 pt-0.5">
-              <h5 class="font-bold text-[#1A1A1A] text-sm mb-1 leading-snug" style="font-family: 'Sora', sans-serif;">
-                {m.learning_path_2_title()}
-              </h5>
-              <p class="text-xs text-[#6B7280] leading-relaxed">
-                {m.learning_path_2_desc()}
-              </p>
-            </div>
-          </div>
-
-          <!-- Connector dot-line between steps -->
-          <div class="flex justify-center">
-            <div class="w-0.5 h-5 bg-[#F9DB2B]/40 rounded-full"></div>
-          </div>
-
-          <!-- Step 4: Advanced Projects -->
-          <div class="flex items-start gap-4 group/step">
-            <div class="relative shrink-0">
-              <div class="w-11 h-11 rounded-xl bg-[#1A1A1A] flex items-center justify-center shadow-lg shadow-black/20 group-hover/step:scale-110 transition-transform duration-300">
-                <span class="text-lg font-black text-white" style="font-family: 'Sora', sans-serif;">2</span>
-              </div>
-              <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white border-2 border-[#1A1A1A] flex items-center justify-center">
-                <svg width="6" height="6" viewBox="0 0 8 8" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M1 4l2 2 4-4"/>
-                </svg>
-              </div>
-            </div>
-            <div class="flex-1 pt-0.5">
-              <h5 class="font-bold text-[#1A1A1A] text-sm mb-1 leading-snug" style="font-family: 'Sora', sans-serif;">
-                {m.learning_path_4_title()}
-              </h5>
-              <p class="text-xs text-[#6B7280] leading-relaxed">
-                {m.learning_path_4_desc()}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      <!-- ====== ELECTRONICS TRACK (Right / Orange) ====== -->
-      <div class="group bg-white border-2 border-[#E18914]/30 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <!-- Track Header -->
-        <div class="bg-gradient-to-r from-[#E18914] to-[#F5A623] px-6 py-4 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/30 flex items-center justify-center backdrop-blur-sm">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="4" width="16" height="16" rx="2"/>
-              <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
-            </svg>
+      <!-- Electronics Path -->
+      <div class="bg-gradient-to-br from-[#F3F4F6] to-white rounded-3xl p-5 lg:p-6 border border-gray-100">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-full bg-[#1D8536]/10 flex items-center justify-center">
+            <Zap size={18} class="text-[#1D8536]" />
           </div>
           <div>
-            <div class="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-[0.15em]">Track</div>
-            <h3 class="font-bold text-[#1A1A1A] text-lg leading-tight" style="font-family: 'Sora', sans-serif;">
-              {m.learning_path_robotics_label()}
-            </h3>
+            <h3 class="text-base font-bold text-[#2D2D2D]">{m.learning_path_electronics_path()}</h3>
+            <p class="text-[10px] text-[#6B7280]">Circuit fundamentals</p>
           </div>
         </div>
-
-        <!-- Steps -->
-        <div class="p-6 space-y-4">
-          <!-- Step 3: Arduino Virtual -->
-          <div class="flex items-start gap-4 group/step">
-            <div class="relative shrink-0">
-              <div class="w-11 h-11 rounded-xl bg-[#E18914]/15 flex items-center justify-center border border-[#E18914]/30 group-hover/step:scale-110 transition-transform duration-300">
-                <span class="text-lg font-black text-[#E18914]" style="font-family: 'Sora', sans-serif;">1</span>
+        
+        <div class="space-y-3">
+          {electronicsPath.map((step, index) => (
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${step.badgeColor}`}>
+                  {step.num}
+                </div>
+                {index < electronicsPath.length - 1 && (
+                  <div class="w-0.5 h-6 bg-gray-200 mt-1"></div>
+                )}
+              </div>
+              <div class="flex-1 pb-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <h4 class="text-sm font-bold text-[#2D2D2D]">{step.title}</h4>
+                  {step.badge && (
+                    <span class={`text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white`} style={`background-color: ${step.badgeColor}`}>
+                      {step.badge}
+                    </span>
+                  )}
+                </div>
+                <p class="text-xs text-[#6B7280] mb-2 line-clamp-2">{step.desc}</p>
+                <span class="text-[10px] bg-[#1D8536]/10 px-2 py-0.5 rounded-full text-[#1D8536]">{step.deliverable}</span>
               </div>
             </div>
-            <div class="flex-1 pt-0.5">
-              <h5 class="font-bold text-[#1A1A1A] text-sm mb-1 leading-snug" style="font-family: 'Sora', sans-serif;">
-                {m.learning_path_3_title()}
-              </h5>
-              <p class="text-xs text-[#6B7280] leading-relaxed">
-                {m.learning_path_3_desc()}
-              </p>
-            </div>
-          </div>
-
-          <!-- Connector dot-line between steps -->
-          <div class="flex justify-center">
-            <div class="w-0.5 h-5 bg-[#E18914]/40 rounded-full"></div>
-          </div>
-
-          <!-- Step 4: Real-World Hardware -->
-          <div class="flex items-start gap-4 group/step">
-            <div class="relative shrink-0">
-              <div class="w-11 h-11 rounded-xl bg-[#1A1A1A] flex items-center justify-center shadow-lg shadow-black/20 group-hover/step:scale-110 transition-transform duration-300">
-                <span class="text-lg font-black text-white" style="font-family: 'Sora', sans-serif;">2</span>
-              </div>
-              <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white border-2 border-[#1A1A1A] flex items-center justify-center">
-                <svg width="6" height="6" viewBox="0 0 8 8" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M1 4l2 2 4-4"/>
-                </svg>
-              </div>
-            </div>
-            <div class="flex-1 pt-0.5">
-              <h5 class="font-bold text-[#1A1A1A] text-sm mb-1 leading-snug" style="font-family: 'Sora', sans-serif;">
-                {m.learning_path_4_title()}
-              </h5>
-              <p class="text-xs text-[#6B7280] leading-relaxed">
-                {m.learning_path_4_desc()}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
+      <!-- AI / Teachable Machine Path -->
+      <div class="bg-gradient-to-br from-[#F3F4F6] to-white rounded-3xl p-5 lg:p-6 border border-gray-100">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-full bg-[#8B5CF6]/10 flex items-center justify-center">
+            <Brain size={18} class="text-[#8B5CF6]" />
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-[#2D2D2D]">AI & Machine Learning</h3>
+            <p class="text-[10px] text-[#6B7280]">No code required</p>
+          </div>
+        </div>
+        
+        <div class="space-y-3">
+          {aiPath.map((step, index) => (
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white bg-[#8B5CF6]">
+                  AI
+                </div>
+              </div>
+              <div class="flex-1 pb-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <h4 class="text-sm font-bold text-[#2D2D2D]">{step.title}</h4>
+                  <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white bg-[#8B5CF6]">
+                    {step.badge}
+                  </span>
+                </div>
+                <p class="text-xs text-[#6B7280] mb-2 line-clamp-2">{step.desc}</p>
+                <span class="text-[10px] bg-[#8B5CF6]/10 px-2 py-0.5 rounded-full text-[#8B5CF6]">{step.deliverable}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Convergence Note -->
+    <div class="mt-10 text-center">
+      <p class="text-sm text-[#6B7280]">
+        <span class="font-semibold text-[#2D2D2D]">All paths lead to real-world skills.</span> Kids can start with any track based on their interest — coding, electronics, or AI. They can also take all!
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+      <a
+        href={`${LMS_URL}/register`}
+        class="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E18914] hover:bg-[#c9780f] text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:shadow-[#E18914]/30 hover:-translate-y-1"
+      >
+        {m.hero_cta_register()} <ArrowRight size={20} />
+      </a>
+      <a
+        href="#pricing"
+        class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-[#F3F4F6] text-[#2D2D2D] border border-gray-200 px-8 py-4 rounded-full text-lg font-bold transition-all hover:-translate-y-1"
+      >
+        <BookOpen size={20} />
+        {m.pricing_per_course_title()}
+      </a>
     </div>
 
   </div>
 </section>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&display=swap');
-</style>

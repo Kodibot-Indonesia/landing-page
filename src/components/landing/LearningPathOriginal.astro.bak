@@ -1,0 +1,114 @@
+---
+import { m } from '../../paraglide/messages.js';
+---
+
+<section class="py-28 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center gap-2 bg-[#F9DB2B]/15 text-[#B89E00] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.5 4.5H12L8.25 7.25 9.75 12 6 9.25 2.25 12l1.5-4.75L0 4.5h4.5z"/></svg>
+        {m.learning_path_badge()}
+      </div>
+      <h2 class="text-4xl sm:text-5xl font-black text-[#1A1A1A] leading-tight mb-5" style="font-family: 'Sora', 'Nunito', sans-serif; letter-spacing: -0.02em;">
+        {m.learning_path_title()}
+      </h2>
+      <p class="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
+        {m.learning_path_subtitle()}
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="relative">
+
+      <!-- Connector line (desktop) -->
+      <div class="hidden md:block absolute top-1/2 left-[12.5%] right-[12.5%] h-0.5 -translate-y-1/2 z-0">
+        <div class="h-full w-full bg-gradient-to-r from-[#F9DB2B] via-[#1D8536] via-[#E18914] to-[#2D2D2D] opacity-20 rounded-full"></div>
+        <div class="absolute inset-0 flex justify-between items-center px-0">
+          <div class="w-2 h-2 rounded-full bg-[#F9DB2B]"></div>
+          <div class="w-2 h-2 rounded-full bg-[#1D8536]"></div>
+          <div class="w-2 h-2 rounded-full bg-[#E18914]"></div>
+          <div class="w-2 h-2 rounded-full bg-[#2D2D2D]"></div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6 relative z-10">
+
+        <!-- Step 1 -->
+        <div class="group flex flex-col items-center text-center h-full">
+          <div class="relative mb-6 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-[#F9DB2B] flex items-center justify-center shadow-lg shadow-[#F9DB2B]/30 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-2xl font-black text-white" style="font-family: 'Sora', sans-serif;">1</span>
+            </div>
+            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border-2 border-[#F9DB2B] flex items-center justify-center">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#F9DB2B"><path d="M4 0l.8 2.4H8L5.6 3.9l.8 2.5L4 5l-2.4 1.4.8-2.5L0 2.4h3.2z"/></svg>
+            </div>
+          </div>
+          <div class="bg-[#FFFDF0] border border-[#F9DB2B]/30 rounded-2xl p-6 w-full flex-1 flex flex-col min-h-0 group-hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-md">
+            <div class="text-xs font-bold text-[#B89E00] uppercase tracking-widest mb-2">Level 1</div>
+            <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug shrink-0" style="font-family: 'Sora', sans-serif;">{m.learning_path_1_title()}</h4>
+            <p class="text-sm text-[#6B7280] leading-relaxed flex-1 min-h-[5.5rem]">{m.learning_path_1_desc()}</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="group flex flex-col items-center text-center h-full">
+          <div class="relative mb-6 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-[#1D8536] flex items-center justify-center shadow-lg shadow-[#1D8536]/30 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-2xl font-black text-white" style="font-family: 'Sora', sans-serif;">2</span>
+            </div>
+            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border-2 border-[#1D8536] flex items-center justify-center">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#1D8536"><path d="M4 0l.8 2.4H8L5.6 3.9l.8 2.5L4 5l-2.4 1.4.8-2.5L0 2.4h3.2z"/></svg>
+            </div>
+          </div>
+          <div class="bg-[#F0FAF2] border border-[#1D8536]/20 rounded-2xl p-6 w-full flex-1 flex flex-col min-h-0 group-hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-md">
+            <div class="text-xs font-bold text-[#1D8536] uppercase tracking-widest mb-2">Level 2</div>
+            <h4 class="font-bold text-[#1A1A1A] text-base mb-2 leading-snug shrink-0" style="font-family: 'Sora', sans-serif;">{m.learning_path_2_title()}</h4>
+            <p class="text-sm text-[#6B7280] leading-relaxed flex-1 min-h-[5.5rem]">{m.learning_path_2_desc()}</p>
+          </div>
+        </div>
+
+        <!-- Step 3 — Highlighted / "current popular" -->
+        <div class="group flex flex-col items-center text-center h-full">
+          <div class="relative mb-6 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-[#E18914] flex items-center justify-center shadow-lg shadow-[#E18914]/40 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-2xl font-black text-white" style="font-family: 'Sora', sans-serif;">3</span>
+            </div>
+            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border-2 border-[#E18914] flex items-center justify-center">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#E18914"><path d="M4 0l.8 2.4H8L5.6 3.9l.8 2.5L4 5l-2.4 1.4.8-2.5L0 2.4h3.2z"/></svg>
+            </div>
+          </div>
+          <div class="bg-gradient-to-b from-[#FFF8F0] to-[#FEF3E2] border border-[#E18914]/40 rounded-2xl p-6 w-full flex-1 flex flex-col min-h-0 group-hover:-translate-y-2 transition-transform duration-300 shadow-md hover:shadow-lg mt-2">
+            <div class="text-xs font-bold text-[#E18914] uppercase tracking-widest mb-2">Level 3</div>
+            <h4 class="font-bold text-[#E18914] text-base mb-2 leading-snug shrink-0" style="font-family: 'Sora', sans-serif;">{m.learning_path_3_title()}</h4>
+            <p class="text-sm text-[#E18914]/70 leading-relaxed flex-1 min-h-[5.5rem]">{m.learning_path_3_desc()}</p>
+          </div>
+        </div>
+
+        <!-- Step 4 — Dark/Master -->
+        <div class="group flex flex-col items-center text-center h-full">
+          <div class="relative mb-6 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-[#1A1A1A] flex items-center justify-center shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-2xl font-black text-white" style="font-family: 'Sora', sans-serif;">4</span>
+            </div>
+            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border-2 border-[#1A1A1A] flex items-center justify-center">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#1A1A1A"><path d="M1 4l2 2 4-4"/><path stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" d="M1 4l2 2 4-4"/></svg>
+            </div>
+          </div>
+          <div class="bg-[#1A1A1A] rounded-2xl p-6 w-full flex-1 flex flex-col min-h-0 group-hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-xl">
+            <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Level 4</div>
+            <h4 class="font-bold text-white text-base mb-2 leading-snug shrink-0" style="font-family: 'Sora', sans-serif;">{m.learning_path_4_title()}</h4>
+            <p class="text-sm text-gray-400 leading-relaxed flex-1 min-h-[5.5rem]">{m.learning_path_4_desc()}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&display=swap');
+</style>

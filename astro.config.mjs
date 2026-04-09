@@ -15,6 +15,10 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [tailwind(), sitemap()],
+  server: {
+    host: true,
+    allowedHosts: ['kodibot-page.fpkcreative.space'],
+  },
   vite: {
     plugins: [
       paraglideVitePlugin({

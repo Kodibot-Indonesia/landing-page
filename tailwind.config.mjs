@@ -3,7 +3,9 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      fontFamily: { sans: ['Montaser Arabic', 'sans-serif'] },
+      fontFamily: { 
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       keyframes: {
         blob: {
           '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
